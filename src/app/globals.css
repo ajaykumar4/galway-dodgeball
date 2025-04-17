@@ -10,7 +10,7 @@ body {
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --foreground: 338 100% 33%; /* Maroon (#a80050) in HSL - for light mode text */
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
@@ -44,7 +44,7 @@ body {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 338 100% 33%; /* Maroon (#a80050) in HSL - for dark mode background */
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -87,3 +87,4 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
