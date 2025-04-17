@@ -40,9 +40,36 @@ export default function Home() {
             <p>
               Explore our website to find out more about upcoming events, check out our Instagram feed, and learn about our community.
             </p>
+            <div className="flex justify-center mt-6 space-x-4">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"
+              >
+                Facebook
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://meetup.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"
+              >
+                Meetup
+              </a>
+            </div>
           </CardContent>
         </Card>
       </div>
     </div>
   );
 }
+
