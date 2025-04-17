@@ -63,7 +63,7 @@ export default function ContactPage() {
                 href="https://whatsapp.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary block rounded-md bg-accent p-2 hover:bg-accent-foreground/10 transition-colors"
+                className="text-primary hover:text-primary-foreground transition-colors"
               >
                 Join WhatsApp Community
               </a>
@@ -74,3 +74,4 @@ export default function ContactPage() {
     </div>
   );
 }
+
