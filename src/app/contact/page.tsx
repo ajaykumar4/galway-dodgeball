@@ -5,6 +5,9 @@ import {MapPin, Clock} from 'lucide-react';
 import Image from 'next/image';
 
 export default function ContactPage() {
+  const address = '11 Ely Place, Sea Rd. Galway, Ireland';
+  const googleMapsUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m1!1s${encodeURIComponent(address)}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x485b9a39498cbb9d%3A0x9e6840096859a6a9!2s11%20Ely%20Place!5e0!3m2!1sen!2sie!4v1729798074774!5m2!1sen!2sie`;
+
   return (
     <div className="container mx-auto py-10">
       <div className="relative rounded-lg overflow-hidden">
@@ -26,7 +29,19 @@ export default function ContactPage() {
               <h2 className="text-xl font-semibold mb-2 flex items-center space-x-2">
                 <MapPin className="h-5 w-5" /> <span>Address</span>
               </h2>
-              <p> [Your Location Here]</p>
+              <p>{address}</p>
+              <div className="mt-4">
+                <iframe
+                  src={googleMapsUrl}
+                  width="100%"
+                  height="300"
+                  style={{border:0}}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Galway Dodgeball Location"
+                ></iframe>
+              </div>
             </section>
 
             <section className="mb-6">
