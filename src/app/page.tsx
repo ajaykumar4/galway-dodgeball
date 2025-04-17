@@ -13,19 +13,20 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative h-screen">
-      <Image
-        src="https://picsum.photos/1920/1080"
-        alt="Dodgeball Background"
-        layout="fill"
-        objectFit="cover"
-        className="absolute top-0 left-0 w-full h-full -z-10"
-      />
-      <div className="container mx-auto py-10 relative">
-        <Card className="bg-card/80 backdrop-blur-md">
+    <div className="container mx-auto py-10">
+      <div className="relative rounded-lg overflow-hidden">
+        <Image
+          src="https://picsum.photos/1920/1080"
+          alt="Dodgeball Background"
+          layout="fill"
+          objectFit="cover"
+          className="absolute top-0 left-0 w-full h-full -z-10"
+        />
+        <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0"></div>
+        <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
-            <CardTitle>Welcome to Galway Dodgeball!</CardTitle>
-            <CardDescription>Your ultimate hub for all things dodgeball in Galway.</CardDescription>
+            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground">Welcome to Galway Dodgeball!</CardTitle>
+            <CardDescription className="text-muted-foreground">Your ultimate hub for all things dodgeball in Galway.</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="mb-4">
