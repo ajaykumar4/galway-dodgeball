@@ -1,7 +1,26 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export default function AboutPage() {
+  const communityMembers = [
+    {
+      name: "John Doe",
+      role: "Founder",
+      imageUrl: "https://picsum.photos/100/100", // Placeholder image
+    },
+    {
+      name: "Jane Smith",
+      role: "Team Lead",
+      imageUrl: "https://picsum.photos/100/100", // Placeholder image
+    },
+    {
+      name: "David Lee",
+      role: "Player",
+      imageUrl: "https://picsum.photos/100/100", // Placeholder image
+    },
+  ];
+
   return (
     <div className="container mx-auto py-10">
       <Card>
@@ -20,9 +39,18 @@ export default function AboutPage() {
             To promote dodgeball as a fun, accessible, and engaging activity for everyone in Galway, building a strong and supportive community.
           </p>
           <h2 className="text-xl font-semibold mt-6">Community Members</h2>
-          <p>
-            Our community is made up of students, professionals, and dodgeball enthusiasts who share a common interest in having fun and staying active.
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+            {communityMembers.map((member, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <Avatar className="h-24 w-24 mb-2">
+                  <AvatarImage src={member.imageUrl} alt={member.name} />
+                  <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <p className="font-semibold">{member.name}</p>
+                <p className="text-sm text-muted-foreground">{member.role}</p>
+              </div>
+            ))}
+          </div>
         </CardContent>
       </Card>
     </div>
