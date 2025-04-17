@@ -9,6 +9,7 @@ export default function Navbar() {
           Galway Dodgeball
         </Link>
         <div className="flex space-x-4 items-center">
+          <Link href="/">Home</Link>
           <Link href="/the-game">The Game</Link>
           <Link href="/events">Events</Link>
           <Link href="/instagram">Instagram</Link>
@@ -20,4 +21,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
