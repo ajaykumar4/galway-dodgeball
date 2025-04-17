@@ -1,9 +1,17 @@
+
 'use client';
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <div className="relative h-screen">
       <Image
@@ -20,18 +28,17 @@ export default function Home() {
             <CardDescription>Your ultimate hub for all things dodgeball in Galway.</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>
-              Galway Dodgeball is a vibrant and inclusive community where you can enjoy fun and exciting games of
-              dodgeball.
+            <p className="mb-4">
+              Galway Dodgeball is a vibrant and inclusive community where you can enjoy fun and exciting games of dodgeball.
+            </p>
+            <p className="mb-4">
               Whether you are a seasoned player or new to the sport, everyone is welcome to join us!
             </p>
-            <p className="mt-4">
-              We meet every Tuesday from 7:30 PM to 9:00 PM. It&apos;s a great way to stay active, meet new people,
-              and have a blast.
+            <p className="mb-4">
+              We meet every Tuesday from 7:30 PM to 9:00 PM. It&apos;s a great way to stay active, meet new people, and have a blast.
             </p>
-            <p className="mt-4">
-              Explore our website to find out more about upcoming events, check out our Instagram feed, and learn
-              about our community.
+            <p>
+              Explore our website to find out more about upcoming events, check out our Instagram feed, and learn about our community.
             </p>
           </CardContent>
         </Card>

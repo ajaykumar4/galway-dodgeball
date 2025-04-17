@@ -1,5 +1,7 @@
+
 import Link from 'next/link';
 import DarkThemeToggle from './DarkThemeToggle';
+import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   return (
@@ -9,12 +11,12 @@ export default function Navbar() {
           Galway Dodgeball
         </Link>
         <div className="flex space-x-4 items-center">
-          <Link href="/">Home</Link>
-          <Link href="/the-game">The Game</Link>
-          <Link href="/events">Events</Link>
-          <Link href="/instagram">Instagram</Link>
-          <Link href="/about">About</Link>
-          <Link href="/contact">Contact</Link>
+          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+          <Link href="/the-game" className="hover:text-primary transition-colors">The Game</Link>
+          <Link href="/events" className="hover:text-primary transition-colors">Events</Link>
+          <Link href="/instagram" className="hover:text-primary transition-colors">Instagram</Link>
+          <Link href="/about" className="hover:text-primary transition-colors">About</Link>
+          <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
           <DarkThemeToggle />
         </div>
       </div>

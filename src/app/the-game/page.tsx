@@ -1,7 +1,7 @@
 
 'use client';
 
-import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
+import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 import Image from 'next/image';
 
 export default function TheGamePage() {
@@ -10,6 +10,7 @@ export default function TheGamePage() {
       <Card>
         <CardHeader>
           <CardTitle>The Game of Dodgeball</CardTitle>
+          <CardDescription>Learn about the rules and how to play dodgeball.</CardDescription>
         </CardHeader>
         <CardContent>
           <section className="mb-6">
@@ -38,7 +39,7 @@ export default function TheGamePage() {
               Please click on the logos below to view and/or download a full set of EDF or WDBF rules.
             </p>
             <div className="flex items-center space-x-4">
-              <a href="https://dodgeballfederation.org/" target="_blank" rel="noopener noreferrer">
+              <a href="https://dodgeballfederation.org/" target="_blank" rel="noopener noreferrer" className="hover:opacity-75 transition-opacity">
                 <Image
                   src="https://dodgeballfederation.org/wp-content/uploads/2023/02/cropped-EDF_Logo_Black-192x192.png" // Replace with actual EDF logo URL
                   alt="European Dodgeball Federation Rules"
@@ -48,7 +49,7 @@ export default function TheGamePage() {
                 />
                 <span className="ml-2">EDF Rules</span>
               </a>
-              <a href="https://www.worlddodgeballfederation.com/" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.worlddodgeballfederation.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-75 transition-opacity">
                 <Image
                   src="https://www.worlddodgeballfederation.com/wp-content/uploads/2023/09/WDBF-logo-sm.png" // Replace with actual WDBF logo URL
                   alt="World Dodgeball Federation Rules"
