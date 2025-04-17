@@ -56,7 +56,7 @@ export default function TheGamePage() {
                   className="hover:opacity-75 transition-opacity"
                 >
                   <Image
-                    src="https://dodgeballfederation.org/wp-content/uploads/2023/02/cropped-EDF_Logo_Black-192x192.png" // Replace with actual EDF logo URL
+                    src="https://dodgeballfederation.org/wp-content/uploads/2023/02/cropped-EDF_Logo_Black-192x192.png"
                     alt="European Dodgeball Federation Rules"
                     width={50}
                     height={50}
@@ -71,7 +71,7 @@ export default function TheGamePage() {
                   className="hover:opacity-75 transition-opacity"
                 >
                   <Image
-                    src="https://www.worlddodgeballfederation.com/wp-content/uploads/2023/09/WDBF-logo-sm.png" // Replace with actual WDBF logo URL
+                    src="https://www.worlddodgeballfederation.com/wp-content/uploads/2023/09/WDBF-logo-sm.png"
                     alt="World Dodgeball Federation Rules"
                     width={50}
                     height={50}
