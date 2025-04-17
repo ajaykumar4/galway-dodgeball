@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import DarkThemeToggle from './DarkThemeToggle';
 
@@ -14,6 +13,7 @@ export default function Navbar() {
           <Link href="/instagram">Instagram</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
+          <Link href="/the-game">The Game</Link>
           <DarkThemeToggle />
         </div>
       </div>
