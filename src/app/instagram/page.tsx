@@ -1,6 +1,4 @@
 
-'use client';
-
 import {getInstagramFeed} from '@/services/instagram';
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 import Image from 'next/image';
@@ -51,3 +49,4 @@ export default async function InstagramPage() {
     </div>
   );
 }
+
