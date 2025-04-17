@@ -1,4 +1,3 @@
-'use client';
 
 import {getUpcomingEvents} from '@/services/meetup';
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
@@ -53,3 +52,4 @@ export default async function EventsPage() {
     </div>
   );
 }
+
