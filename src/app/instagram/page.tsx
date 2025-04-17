@@ -1,3 +1,4 @@
+
 'use client';
 
 import {getInstagramFeed} from '@/services/instagram';
@@ -26,7 +27,7 @@ export default async function InstagramPage() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {posts.map(post => (
-                <Card key={post.id}>
+                <Card key={post.id} className="bg-transparent">
                   <CardHeader>
                     <CardTitle>{post.caption}</CardTitle>
                   </CardHeader>

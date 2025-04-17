@@ -25,7 +25,7 @@ export default async function EventsPage() {
           <CardContent>
             {events.length > 0 ? (
               events.map(event => (
-                <Card key={event.id} className="mb-4">
+                <Card key={event.id} className="mb-4 bg-transparent">
                   <CardHeader>
                     <CardTitle>{event.name}</CardTitle>
                   </CardHeader>
@@ -52,4 +52,5 @@ export default async function EventsPage() {
     </div>
   );
 }
+
 
