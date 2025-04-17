@@ -6,7 +6,9 @@ import Image from 'next/image';
 
 export default function ContactPage() {
   const address = '11 Ely Place, Sea Rd. Galway, Ireland';
-  const googleMapsUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m1!1s${encodeURIComponent(address)}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x485b9a39498cbb9d%3A0x9e6840096859a6a9!2s11%20Ely%20Place!5e0!3m2!1sen!2sie!4v1729798074774!5m2!1sen!2sie`;
+  // Correctly encode the address for the Google Maps URL
+  const encodedAddress = encodeURIComponent(address);
+  const googleMapsUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m1!1s${encodedAddress}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x485b9a39498cbb9d%3A0x9e6840096859a6a9!2s11%20Ely%20Place!5e0!3m2!1sen!2sie!4v1729798074774!5m2!1sen!2sie`;
 
   return (
     <div className="container mx-auto py-10">
