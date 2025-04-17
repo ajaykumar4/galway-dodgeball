@@ -9,14 +9,15 @@ export default function Navbar() {
           Galway Dodgeball
         </Link>
         <div className="flex space-x-4 items-center">
+          <Link href="/the-game">The Game</Link>
           <Link href="/events">Events</Link>
           <Link href="/instagram">Instagram</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
-          <Link href="/the-game">The Game</Link>
           <DarkThemeToggle />
         </div>
       </div>
     </nav>
   );
 }
+
