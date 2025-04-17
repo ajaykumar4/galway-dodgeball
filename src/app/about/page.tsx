@@ -31,9 +31,9 @@ export default function AboutPage() {
           alt="Dodgeball Background"
           layout="fill"
           objectFit="cover"
-          className="absolute top-0 left-0 w-full h-full -z-10"
+          className="absolute top-0 left-0 w-full h-full -z-10 rounded-lg"
         />
-        <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0"></div>
+        <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0 rounded-lg"></div>
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
             <CardTitle className="text-3xl md:text-5xl font-bold text-foreground">About Galway Dodgeball</CardTitle>
