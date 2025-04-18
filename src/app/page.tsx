@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { SiFacebook, SiInstagram, SiX, SiMeetup } from 'simple-icons-react';
+import { SiFacebook, SiInstagram, SiX, SiMeetup } from 'react-icons/si';
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
@@ -24,7 +24,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0 rounded-lg"></div>
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
-            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground">
+            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground flex items-center">
               <Image
                 src="/galway-dodgeball-logo.png"
                 width={50}
@@ -95,3 +95,5 @@ export default function Home() {
 }
 
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
+
+    
