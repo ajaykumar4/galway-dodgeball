@@ -10,6 +10,7 @@ interface SimpleIcon {
   title: string;
   source: string;
   svg: string;
+  path: string;
 }
 
 export default function Home() {
@@ -19,10 +20,10 @@ export default function Home() {
     setIsMounted(true);
   }, []);
 
-  const facebook = SimpleIcons.Get('facebook') as SimpleIcon;
-  const twitter = SimpleIcons.Get('x') as SimpleIcon;
-  const instagram = SimpleIcons.Get('instagram') as SimpleIcon;
-  const meetup = SimpleIcons.Get('meetup') as SimpleIcon;
+  const facebook = SimpleIcons.facebook as SimpleIcon;
+  const twitter = SimpleIcons.x as SimpleIcon;
+  const instagram = SimpleIcons.instagram as SimpleIcon;
+  const meetup = SimpleIcons.meetup as SimpleIcon;
 
   return (
     <div className="container mx-auto py-10 px-4">
