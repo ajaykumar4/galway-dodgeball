@@ -50,7 +50,7 @@ export default function TheGamePage() {
               </p>
               <div className="flex items-center space-x-4 flex-wrap">
                 <a
-                  href="https://drive.google.com/file/d/1_lFtJZaN-W5XgNO8boK8ne1aJaQuT1kw/view?usp=drive_link"
+                  href="https://www.dodgeballeurope.org/wp-content/uploads/2024/03/EDF-Rules-and-regulations-6.1.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-75 transition-opacity flex flex-col items-center"
@@ -65,7 +65,7 @@ export default function TheGamePage() {
                   <span className="ml-2">EDF Rules</span>
                 </a>
                 <a
-                  href="https://drive.google.com/file/d/1nkOw6O2DDwgw8CnHIqi7_0c_H_8lgx0z/view?usp=drive_link"
+                  href="https://worlddodgeballfederation.com/wdbf-content/uploads/2024/03/WDBF-Dodgeball-Rules-2024.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-75 transition-opacity flex flex-col items-center"
