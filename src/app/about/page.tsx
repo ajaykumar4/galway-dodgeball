@@ -62,7 +62,7 @@ export default function AboutPage() {
 
             <section>
               <h2 className="text-xl font-semibold mb-2">Community Members</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
                 {communityMembers.map((member, index) => (
                   <div key={index} className="flex flex-col items-center">
                     <Avatar className="h-24 w-24 mb-2">

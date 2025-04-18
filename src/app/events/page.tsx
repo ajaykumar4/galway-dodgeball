@@ -23,34 +23,34 @@ export default async function EventsPage() {
             <CardDescription className="text-muted-foreground">Stay updated on our latest dodgeball events.</CardDescription>
           </CardHeader>
           <CardContent>
-            {events.length > 0 ? (
-              events.map(event => (
-                <Card key={event.id} className="mb-4 bg-transparent">
-                  <CardHeader>
-                    <CardTitle>{event.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{event.time}</p>
-                    <p>{event.description}</p>
-                    <a
-                      href={event.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary"
-                    >
-                      Learn More
-                    </a>
-                  </CardContent>
-                </Card>
-              ))
-            ) : (
-              <p>No upcoming events found.</p>
-            )}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {events.length > 0 ? (
+                events.map(event => (
+                  <Card key={event.id} className="mb-4 bg-transparent">
+                    <CardHeader>
+                      <CardTitle>{event.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p>{event.time}</p>
+                      <p>{event.description}</p>
+                      <a
+                        href={event.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary"
+                      >
+                        Learn More
+                      </a>
+                    </CardContent>
+                  </Card>
+                ))
+              ) : (
+                <p>No upcoming events found.</p>
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>
     </div>
   );
 }
-
-

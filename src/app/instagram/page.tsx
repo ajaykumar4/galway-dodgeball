@@ -23,7 +23,7 @@ export default async function InstagramPage() {
             <CardDescription className="text-muted-foreground">Check out our latest posts on Instagram.</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {posts.map(post => (
                 <Card key={post.id} className="bg-transparent">
                   <CardHeader>
@@ -49,4 +49,3 @@ export default async function InstagramPage() {
     </div>
   );
 }
-

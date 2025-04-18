@@ -48,12 +48,12 @@ export default function TheGamePage() {
               <p className="mb-4">
                 Please click on the logos below to view and/or download a full set of EDF or WDBF rules.
               </p>
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 flex-wrap">
                 <a
                   href="https://dodgeballfederation.org/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:opacity-75 transition-opacity"
+                  className="hover:opacity-75 transition-opacity flex flex-col items-center"
                 >
                   <Image
                     src="https://dodgeballfederation.org/wp-content/uploads/2023/02/cropped-EDF_Logo_Black-192x192.png"
@@ -68,7 +68,7 @@ export default function TheGamePage() {
                   href="https://www.worlddodgeballfederation.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:opacity-75 transition-opacity"
+                  className="hover:opacity-75 transition-opacity flex flex-col items-center"
                 >
                   <Image
                     src="https://www.worlddodgeballfederation.com/wp-content/uploads/2023/09/WDBF-logo-sm.png"

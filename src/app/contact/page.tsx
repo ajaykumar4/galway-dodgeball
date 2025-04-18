@@ -38,6 +38,7 @@ export default function ContactPage() {
                   src={mapsUrl}
                   width="100%"
                   height="300"
+                  className="max-w-full" // Added max-w-full for responsiveness
                   style={{border:0}}
                   allowFullScreen={true}
                   loading="lazy"
@@ -60,6 +61,7 @@ export default function ContactPage() {
                 Connect with us and other players through our WhatsApp community group:
               </p>
               <a
+
                 href="https://whatsapp.com"
                 target="_blank"
                 rel="noopener noreferrer"
