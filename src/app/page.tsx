@@ -3,7 +3,7 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import * as SimpleIcons from 'simple-icons-react';
+import { SiFacebook, SiInstagram, SiX, SiMeetup } from 'simple-icons-react';
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
@@ -48,7 +48,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SimpleIcons.SiFacebook size={24} className="mr-2" alt="Facebook icon" title="Facebook" />
+                <SiFacebook size={24} className="mr-2" alt="Facebook icon" title="Facebook" />
                 Facebook
               </a>
               <a
@@ -57,7 +57,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SimpleIcons.SiX size={24} className="mr-2" alt="X.com icon" title="X"/>
+                <SiX size={24} className="mr-2" alt="X.com icon" title="X"/>
                 X
               </a>
               <a
@@ -66,7 +66,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SimpleIcons.SiInstagram size={24} className="mr-2" alt="Instagram icon" title="Instagram"/>
+                <SiInstagram size={24} className="mr-2" alt="Instagram icon" title="Instagram"/>
                 Instagram
               </a>
               <a
@@ -75,7 +75,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SimpleIcons.SiMeetup size={24} className="mr-2" alt="Meetup icon" title="Meetup"/>
+                <SiMeetup size={24} className="mr-2" alt="Meetup icon" title="Meetup"/>
                 Meetup
               </a>
             </div>
@@ -85,3 +85,5 @@ export default function Home() {
     </div>
   );
 }
+
+
