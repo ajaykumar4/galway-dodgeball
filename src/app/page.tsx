@@ -4,15 +4,6 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Facebook, Instagram, Twitter, Calendar } from 'lucide-react';
 
-interface SimpleIcon {
-  slug: string;
-  hex: string;
-  title: string;
-  source: string;
-  svg: string;
-  path: string;
-}
-
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
 
