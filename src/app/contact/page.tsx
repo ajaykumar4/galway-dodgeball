@@ -8,18 +8,18 @@ export default function ContactPage() {
   const address = 'OUR LADY\'S BOYS CLUB, 11 Ely Place, Sea Road, Galway, Ireland, H91 R3K6';
   // Correctly encode the address for the Google Maps URL
   const encodedAddress = encodeURIComponent(address);
-  const mapsUrl = `https://maps.google.com/maps/embed?pb=!1m18!1m12!1m1!1s${encodedAddress}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x485b9a39498cbb9d%3A0x9e6840096859a6a9!2s11%20Ely%20Place!5e0!3m2!1sen!2sie!4v1729798074774!5m2!1sen!2sie`;
+  const mapsUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${encodedAddress}`;
 
   return (
-    <div className="relative  min-h-screen flex items-center justify-center">
+    <div className="relative min-h-screen flex items-center justify-center">
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
         layout="fill"
         objectFit="cover"
-        className="absolute top-0 left-0 w-full h-full -z-10 "
+        className="absolute top-0 left-0 w-full h-full -z-10"
       />
-      <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0  "></div>
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0"></div>
       <div className="container mx-auto py-10 px-4">
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
@@ -37,8 +37,7 @@ export default function ContactPage() {
                   src={mapsUrl}
                   width="100%"
                   height="300"
-                  className="max-w-full" // Added max-w-full for responsiveness
-                  style={{border:0}}
+                  style={{ border: 0 }}
                   allowFullScreen={true}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
