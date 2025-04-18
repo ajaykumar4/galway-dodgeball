@@ -2,7 +2,15 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { SiFacebook, SiInstagram, SiX, SiMeetup } from 'react-icons/si';
+import * as SimpleIcons from 'simple-icons';
+
+interface SimpleIcon {
+  slug: string;
+  hex: string;
+  title: string;
+  source: string;
+  svg: string;
+}
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
@@ -10,6 +18,11 @@ export default function Home() {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  const facebook = SimpleIcons.Get('facebook') as SimpleIcon;
+  const twitter = SimpleIcons.Get('x') as SimpleIcon;
+  const instagram = SimpleIcons.Get('instagram') as SimpleIcon;
+  const meetup = SimpleIcons.Get('meetup') as SimpleIcon;
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -56,7 +69,9 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SiFacebook size={24} className="mr-2" alt="Facebook icon" title="Facebook" />
+                <svg role="img" viewBox="0 0 24 24" width="24" height="24" fill={facebook.hex} className="mr-2 h-5 w-5" alt="Facebook icon" title="Facebook">
+                  <path d={facebook.path} />
+                </svg>
                 Facebook
               </a>
               <a
@@ -65,7 +80,9 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SiX size={24} className="mr-2" alt="X.com icon" title="X"/>
+                <svg role="img" viewBox="0 0 24 24" width="24" height="24" fill={twitter.hex} className="mr-2 h-5 w-5" alt="X.com icon" title="X">
+                  <path d={twitter.path} />
+                </svg>
                 X
               </a>
               <a
@@ -74,7 +91,9 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SiInstagram size={24} className="mr-2" alt="Instagram icon" title="Instagram"/>
+                <svg role="img" viewBox="0 0 24 24" width="24" height="24" fill={instagram.hex} className="mr-2 h-5 w-5" alt="Instagram icon" title="Instagram">
+                  <path d={instagram.path} />
+                </svg>
                 Instagram
               </a>
               <a
@@ -83,7 +102,9 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SiMeetup size={24} className="mr-2" alt="Meetup icon" title="Meetup"/>
+                <svg role="img" viewBox="0 0 24 24" width="24" height="24" fill={meetup.hex} className="mr-2 h-5 w-5" alt="Meetup icon" title="Meetup">
+                  <path d={meetup.path} />
+                </svg>
                 Meetup
               </a>
             </div>
