@@ -7,7 +7,7 @@ export default async function InstagramPage() {
   const posts = await getInstagramFeed();
 
   return (
-    <div className="relative rounded-lg overflow-hidden min-h-[60vh] flex items-center justify-center">
+    <div className="relative rounded-lg overflow-hidden min-h-screen flex items-center justify-center">
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
@@ -19,8 +19,8 @@ export default async function InstagramPage() {
       <div className="container mx-auto py-10 px-4">
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
-            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground">Instagram Feed</CardTitle>
-            <CardDescription className="text-muted-foreground">Check out our latest posts on Instagram.</CardDescription>
+            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground flex items-center justify-center">Instagram Feed</CardTitle>
+            <CardDescription className="text-muted-foreground text-center">Check out our latest posts on Instagram.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

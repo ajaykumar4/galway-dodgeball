@@ -7,7 +7,7 @@ export default async function EventsPage() {
   const events = await getUpcomingEvents();
 
   return (
-    <div className="relative rounded-lg overflow-hidden min-h-[60vh] flex items-center justify-center">
+    <div className="relative rounded-lg overflow-hidden min-h-screen flex items-center justify-center">
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
@@ -19,8 +19,8 @@ export default async function EventsPage() {
       <div className="container mx-auto py-10 px-4">
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
-            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground">Upcoming Events</CardTitle>
-            <CardDescription className="text-muted-foreground">Stay updated on our latest dodgeball events.</CardDescription>
+            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground flex items-center justify-center">Upcoming Events</CardTitle>
+            <CardDescription className="text-muted-foreground text-center">Stay updated on our latest dodgeball events.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

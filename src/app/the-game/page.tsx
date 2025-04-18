@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function TheGamePage() {
   return (
-    <div className="relative rounded-lg overflow-hidden min-h-[60vh] flex items-center justify-center">
+    <div className="relative rounded-lg overflow-hidden min-h-screen flex items-center justify-center">
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
@@ -17,8 +17,8 @@ export default function TheGamePage() {
       <div className="container mx-auto py-10 px-4">
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
-            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground">The Game of Dodgeball</CardTitle>
-            <CardDescription className="text-muted-foreground">Learn about the rules and how to play dodgeball.</CardDescription>
+            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground flex items-center justify-center">The Game of Dodgeball</CardTitle>
+            <CardDescription className="text-muted-foreground text-center">Learn about the rules and how to play dodgeball.</CardDescription>
           </CardHeader>
           <CardContent>
             <section className="mb-6">
@@ -69,7 +69,7 @@ export default function TheGamePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-75 transition-opacity flex flex-col items-center"
-                >
+                  >
                   <Image
                     src="https://www.worlddodgeballfederation.com/wp-content/uploads/2023/09/WDBF-logo-sm.png"
                     alt="World Dodgeball Federation Rules"
