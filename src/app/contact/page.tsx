@@ -62,7 +62,7 @@ export default function ContactPage() {
               </p>
               <a
 
-                href="https://whatsapp.com"
+                href="https://chat.whatsapp.com/J1B8KkPVLCN2HL7fPK0xf5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"

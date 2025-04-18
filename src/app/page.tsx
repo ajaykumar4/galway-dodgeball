@@ -2,12 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import {
-  SiFacebook,
-  SiInstagram,
-  SiX,
-  SiMeetup,
-} from 'react-icons/si';
+import { SiFacebook, SiInstagram, SiX, SiMeetup } from 'react-icons/si';
 
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 
@@ -32,33 +27,26 @@ export default function Home() {
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
             <CardTitle className="text-3xl md:text-5xl font-bold text-foreground flex items-center">
-              <Image
-                src="/galway-dodgeball-logo.png"
-                width={50}
-                height={50}
-                alt="Galway Dodgeball Logo"
-                className="mr-2 rounded-full"
-              />
               Welcome to Galway Dodgeball!
             </CardTitle>
-            <CardDescription className="text-muted-foreground">Your ultimate hub for all things dodgeball in Galway.</CardDescription>
+            <CardDescription className="text-muted-foreground">Your go-to spot for all things dodgeball in Galway 🎯</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="mb-4">
-              Galway Dodgeball is a vibrant and inclusive community where you can enjoy fun and exciting games of dodgeball.
+            Galway Dodgeball is a vibrant, inclusive community where everyone&apos;s welcome&mdash;whether you&apos;ve played for years or you&apos;ve never touched a dodgeball in your life. If you&apos;re new to Galway and looking to meet people, stay active, and have some fun, this is the perfect place to start.
             </p>
             <p className="mb-4">
-              Whether you are a seasoned player or new to the sport, everyone is welcome to join us!
+              We play every Tuesday from 7:30 PM to 9:00 PM.
             </p>
             <p className="mb-4">
-              We meet every Tuesday from 7:30 PM to 9:00 PM. It&apos;s a great way to stay active, meet new people, and have a blast.
+            No experience? No problem! Just show up in comfortable clothes and runners&mdash;we&apos;ll take care of the rest.
             </p>
             <p>
-              Explore our website to find out more about upcoming events, check out our Instagram feed, and learn about our community.
+              Explore our community, get updates on upcoming events, and see what we&apos;re all about:
             </p>
             <div className="flex justify-center mt-6 space-x-4 flex-wrap">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/GalwayDodgeball"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
@@ -67,7 +55,7 @@ export default function Home() {
                 Facebook
               </a>
               <a
-                href="https://x.com"
+                href="https://x.com/dodgeballgalway"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
@@ -76,7 +64,7 @@ export default function Home() {
                 X
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/galwaydodgeball"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
@@ -85,7 +73,7 @@ export default function Home() {
                 Instagram
               </a>
               <a
-                href="https://www.meetup.com"
+                href="https://www.meetup.com/galway-dodgeball-club"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
@@ -94,6 +82,9 @@ export default function Home() {
                 Meetup
               </a>
             </div>
+            <p>
+              Come join the fun &mdash; we&apos;d love to meet you!
+            </p>
           </CardContent>
         </Card>
       </div>
