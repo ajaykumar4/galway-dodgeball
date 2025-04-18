@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function TheGamePage() {
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 px-4">
       <div className="relative rounded-lg overflow-hidden">
         <Image
           src="https://picsum.photos/1920/1080"

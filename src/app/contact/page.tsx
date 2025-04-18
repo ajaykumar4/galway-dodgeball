@@ -12,7 +12,7 @@ export default function ContactPage() {
   const mapsUrl = `https://maps.google.com/maps?q=${encodedAddress}&t=&z=13&ie=UTF8&iwloc=&output=embed`
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 px-4">
       <div className="relative rounded-lg overflow-hidden">
         <Image
           src="https://picsum.photos/1920/1080"
