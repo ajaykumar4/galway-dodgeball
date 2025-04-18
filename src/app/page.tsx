@@ -27,20 +27,13 @@ export default function Home() {
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
             <CardTitle className="text-3xl md:text-5xl font-bold text-foreground flex items-center justify-center">
-              <Image
-                src="/galway-dodgeball-logo.png"
-                width={40}
-                height={40}
-                className="mr-2 rounded-full"
-                alt="Galway Dodgeball Logo"
-              />
               Welcome to Galway Dodgeball!
             </CardTitle>
             <CardDescription className="text-muted-foreground text-center">Your go-to spot for all things dodgeball in Galway 🎯</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center">
             <p className="mb-4 text-center">
-              Galway Dodgeball is a vibrant, inclusive community where everyone&apos;s welcome&mdash;whether you&apos;ve played for years or you&apos;ve never touched a dodgeball in your life. If you&apos;re new to Galway and looking to meet people, stay active, and have some fun, this is the perfect place to start.
+              Galway Dodgeball is a vibrant, inclusive community where everyone&apos;s welcome&mdash;whether you&apos;ve played for years or you&apos;ve never touched a dodgeball in your life. If you&apos;re new to Galway, or been here for a while and looking to meet people, stay active, and have some fun, this is the perfect place to start.
             </p>
             <p className="mb-4 text-center">
               We play every Tuesday from 7:30 PM to 9:00 PM.
