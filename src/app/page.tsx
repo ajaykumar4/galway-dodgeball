@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react';
 import {
   SiFacebook,
   SiInstagram,
-  SiTwitter,
-  SiMeetup
-} from 'simple-icons';
+  SiX,
+} from 'react-icons/si';
+import {FaMeetup} from 'react-icons/fa'
+
+import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
@@ -61,7 +63,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SiFacebook className="mr-2 h-5 w-5" alt="Facebook icon" title="Facebook"/>
+                <SiFacebook className="mr-2 h-5 w-5" alt="Facebook icon" title="Facebook" />
                 Facebook
               </a>
               <a
@@ -70,7 +72,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SiTwitter className="mr-2 h-5 w-5" alt="X icon" title="X"/>
+                <SiX className="mr-2 h-5 w-5" alt="X icon" title="X" />
                 X
               </a>
               <a
@@ -79,7 +81,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SiInstagram className="mr-2 h-5 w-5" alt="Instagram icon" title="Instagram"/>
+                <SiInstagram className="mr-2 h-5 w-5" alt="Instagram icon" title="Instagram" />
                 Instagram
               </a>
               <a
@@ -88,7 +90,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <SiMeetup className="mr-2 h-5 w-5" alt="Meetup icon" title="Meetup"/>
+                <FaMeetup className="mr-2 h-5 w-5" alt="Meetup icon" title="Meetup" />
                 Meetup
               </a>
             </div>
