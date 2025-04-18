@@ -50,31 +50,31 @@ export default function TheGamePage() {
               </p>
               <div className="flex items-center space-x-4 flex-wrap">
                 <a
-                  href="https://dodgeballfederation.org/"
+                  href="https://drive.google.com/file/d/1_lFtJZaN-W5XgNO8boK8ne1aJaQuT1kw/view?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-75 transition-opacity flex flex-col items-center"
                 >
-                  <Image
-                    src="https://dodgeballfederation.org/wp-content/uploads/2023/02/cropped-EDF_Logo_Black-192x192.png"
+                  <img
+                    src="https://www.dodgeballeurope.org/wp-content/uploads/2018/03/2-EDF-logo-horizontal.png"
                     alt="European Dodgeball Federation Rules"
-                    width={50}
-                    height={50}
+                    width={200}
+                    height={200}
                     className="rounded-md"
                   />
                   <span className="ml-2">EDF Rules</span>
                 </a>
                 <a
-                  href="https://www.worlddodgeballfederation.com/"
+                  href="https://drive.google.com/file/d/1nkOw6O2DDwgw8CnHIqi7_0c_H_8lgx0z/view?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-75 transition-opacity flex flex-col items-center"
                   >
-                  <Image
-                    src="https://www.worlddodgeballfederation.com/wp-content/uploads/2023/09/WDBF-logo-sm.png"
+                  <img
+                    src="https://worlddodgeballfederation.com/wdbf-content/uploads/2020/02/WDBF-Colour-Emblem-Updated-Logo.png"
                     alt="World Dodgeball Federation Rules"
-                    width={50}
-                    height={50}
+                    width={200}
+                    height={200}
                     className="rounded-md"
                   />
                   <span className="ml-2">WDBF Rules</span>

@@ -12,18 +12,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'dodgeballfederation.org',
-        port: '',
-        pathname: '/wp-content/uploads/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'www.worlddodgeballfederation.com',
-        port: '',
-        pathname: '/wp-content/uploads/**',
-      },
-      {
-        protocol: 'https',
         hostname: 'picsum.photos',
         port: '',
         pathname: '/**',
