@@ -1,6 +1,5 @@
 'use client';
 
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { SiFacebook, SiInstagram, SiX, SiMeetup } from 'simple-icons-react';
@@ -25,7 +24,16 @@ export default function Home() {
         <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0 rounded-lg"></div>
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
-            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground">Welcome to Galway Dodgeball!</CardTitle>
+            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground">
+              <Image
+                src="/galway-dodgeball-logo.png"
+                width={50}
+                height={50}
+                alt="Galway Dodgeball Logo"
+                className="mr-2 rounded-full"
+              />
+              Welcome to Galway Dodgeball!
+            </CardTitle>
             <CardDescription className="text-muted-foreground">Your ultimate hub for all things dodgeball in Galway.</CardDescription>
           </CardHeader>
           <CardContent>
@@ -86,3 +94,4 @@ export default function Home() {
   );
 }
 
+import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
