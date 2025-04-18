@@ -33,7 +33,7 @@ export default function Navbar() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full sm:w-64">
+            <SheetContent side="right" className="w-full sm:w-64 max-w-sm">
               <div className="grid gap-4 py-4">
                 <Link href="/" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>Home</Link>
                 <Link href="/the-game" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>The Game</Link>
