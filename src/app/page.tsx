@@ -3,7 +3,7 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Facebook, Instagram } from 'lucide-react';
+import {Facebook, Instagram, X} from 'simple-icons-react';
 
 function MeetupIcon() {
   return (
@@ -58,8 +58,17 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <Facebook className="mr-2 h-5 w-5" />
+                <Facebook size={24} className="mr-2" alt="Facebook icon" title="Facebook" />
                 Facebook
+              </a>
+              <a
+                href="https://x.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
+              >
+                <X size={24} className="mr-2" alt="X.com icon" title="X"/>
+                X
               </a>
               <a
                 href="https://instagram.com"
@@ -67,7 +76,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <Instagram className="mr-2 h-5 w-5" />
+                <Instagram size={24} className="mr-2" alt="Instagram icon" title="Instagram"/>
                 Instagram
               </a>
               <a
@@ -86,4 +95,3 @@ export default function Home() {
     </div>
   );
 }
-
