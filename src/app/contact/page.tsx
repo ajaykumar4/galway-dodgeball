@@ -8,7 +8,7 @@ export default function ContactPage() {
   const address = 'OUR LADY\'S BOYS CLUB, 11 Ely Place, Sea Road, Galway, Ireland, H91 R3K6';
   // Correctly encode the address for the Google Maps URL
   const encodedAddress = encodeURIComponent(address);
-  const mapsUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${encodedAddress}`;
+  const mapsUrl = `https://maps.google.com/maps?q=${encodedAddress}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
