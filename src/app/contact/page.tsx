@@ -11,7 +11,7 @@ export default function ContactPage() {
   const mapsUrl = `https://maps.google.com/maps/embed?pb=!1m18!1m12!1m1!1s${encodedAddress}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x485b9a39498cbb9d%3A0x9e6840096859a6a9!2s11%20Ely%20Place!5e0!3m2!1sen!2sie!4v1729798074774!5m2!1sen!2sie`;
 
   return (
-    <div className="relative rounded-lg overflow-hidden min-h-screen flex items-center justify-center">
+    <div className="relative  min-h-screen flex items-center justify-center">
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"

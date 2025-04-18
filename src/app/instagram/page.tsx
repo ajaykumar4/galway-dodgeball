@@ -1,4 +1,5 @@
 
+
 import {getInstagramFeed} from '@/services/instagram';
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 import Image from 'next/image';
@@ -7,7 +8,7 @@ export default async function InstagramPage() {
   const posts = await getInstagramFeed();
 
   return (
-    <div className="relative rounded-lg overflow-hidden min-h-screen flex items-center justify-center">
+    <div className="relative  min-h-screen flex items-center justify-center">
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"

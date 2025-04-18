@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function TheGamePage() {
   return (
-    <div className="relative rounded-lg overflow-hidden min-h-screen flex items-center justify-center">
+    <div className="relative  min-h-screen flex items-center justify-center">
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
