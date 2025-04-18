@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { SiFacebook, SiInstagram, SiX } from 'react-icons/si';
+import { SiFacebook, SiInstagram, SiX, SiMeetup } from 'react-icons/si';
 
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 
@@ -79,7 +79,15 @@ export default function Home() {
                 <SiInstagram className="mr-2 h-5 w-5" alt="Instagram icon" title="Instagram" />
                 Instagram
               </a>
-
+              <a
+                href="https://www.meetup.com/galway-dodgeball-club"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
+              >
+                <SiMeetup className="mr-2 h-5 w-5" alt="Meetup icon" title="Meetup" />
+                Meetup
+              </a>
             </div>
             <p className="text-center">
               Come join the fun &mdash; we&apos;d love to meet you!
@@ -90,3 +98,4 @@ export default function Home() {
     </div>
   );
 }
+
