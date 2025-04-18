@@ -48,7 +48,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex space-x-2 items-center flex-wrap">
+        <div className="hidden lg:flex space-x-6 items-center flex-wrap">
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>
           <Link href="/the-game" className="hover:text-primary transition-colors">The Game</Link>
           <Link href="/events" className="hover:text-primary transition-colors">Events</Link>
@@ -61,4 +61,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
 
