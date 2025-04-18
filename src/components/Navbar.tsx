@@ -2,12 +2,20 @@
 import Link from 'next/link';
 import DarkThemeToggle from './DarkThemeToggle';
 import { Button } from "@/components/ui/button";
+import Image from 'next/image';
 
 export default function Navbar() {
   return (
     <nav className="bg-background border-b border-border p-4">
       <div className="container mx-auto flex justify-between items-center flex-wrap">
-        <Link href="/" className="text-xl font-bold">
+        <Link href="/" className="text-xl font-bold flex items-center">
+          <Image
+            src="/galway-dodgeball-logo.png"
+            alt="Galway Dodgeball Logo"
+            width={30}
+            height={30}
+            className="mr-2 rounded-full"
+          />
           Galway Dodgeball
         </Link>
         <div className="flex space-x-2 items-center flex-wrap">
