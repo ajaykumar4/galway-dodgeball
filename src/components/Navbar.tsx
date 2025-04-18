@@ -11,7 +11,6 @@ export default function Navbar() {
         <Link href="/" className="text-xl font-bold flex items-center">
           <Image
             src="/galway-dodgeball-logo.png"
-            alt="Galway Dodgeball Logo"
             width={30}
             height={30}
             className="mr-2 rounded-full"
@@ -31,4 +30,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
 
