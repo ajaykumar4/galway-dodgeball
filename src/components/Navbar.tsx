@@ -13,6 +13,7 @@ export default function Navbar() {
             src="/galway-dodgeball-logo.png"
             width={30}
             height={30}
+            alt="Galway Dodgeball Logo"
             className="mr-2 rounded-full"
           />
           Galway Dodgeball
