@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import * as SimpleIcons from 'simple-icons';
+import { Facebook, Instagram, Twitter, Calendar } from 'lucide-react';
 
 interface SimpleIcon {
   slug: string;
@@ -19,11 +19,6 @@ export default function Home() {
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  const facebook = SimpleIcons.facebook as SimpleIcon;
-  const twitter = SimpleIcons.x as SimpleIcon;
-  const instagram = SimpleIcons.instagram as SimpleIcon;
-  const meetup = SimpleIcons.meetup as SimpleIcon;
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -70,9 +65,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <svg role="img" viewBox="0 0 24 24" width="24" height="24" fill={facebook.hex} className="mr-2 h-5 w-5" alt="Facebook icon" title="Facebook">
-                  <path d={facebook.path} />
-                </svg>
+                <Facebook className="mr-2 h-5 w-5" alt="Facebook icon" title="Facebook"/>
                 Facebook
               </a>
               <a
@@ -81,9 +74,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <svg role="img" viewBox="0 0 24 24" width="24" height="24" fill={twitter.hex} className="mr-2 h-5 w-5" alt="X.com icon" title="X">
-                  <path d={twitter.path} />
-                </svg>
+                <Twitter className="mr-2 h-5 w-5" alt="X.com icon" title="X"/>
                 X
               </a>
               <a
@@ -92,9 +83,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <svg role="img" viewBox="0 0 24 24" width="24" height="24" fill={instagram.hex} className="mr-2 h-5 w-5" alt="Instagram icon" title="Instagram">
-                  <path d={instagram.path} />
-                </svg>
+                <Instagram className="mr-2 h-5 w-5" alt="Instagram icon" title="Instagram"/>
                 Instagram
               </a>
               <a
@@ -103,9 +92,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <svg role="img" viewBox="0 0 24 24" width="24" height="24" fill={meetup.hex} className="mr-2 h-5 w-5" alt="Meetup icon" title="Meetup">
-                  <path d={meetup.path} />
-                </svg>
+                <Calendar className="mr-2 h-5 w-5" alt="Meetup icon" title="Meetup"/>
                 Meetup
               </a>
             </div>
@@ -117,5 +104,4 @@ export default function Home() {
 }
 
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
-
     
