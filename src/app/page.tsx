@@ -6,8 +6,8 @@ import {
   SiFacebook,
   SiInstagram,
   SiX,
+  SiMeetup,
 } from 'react-icons/si';
-import {FaMeetup} from 'react-icons/fa'
 
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 
@@ -90,7 +90,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-flex items-center"
               >
-                <FaMeetup className="mr-2 h-5 w-5" alt="Meetup icon" title="Meetup" />
+                <SiMeetup className="mr-2 h-5 w-5" alt="Meetup icon" title="Meetup" />
                 Meetup
               </a>
             </div>
