@@ -3,6 +3,7 @@
 import {getInstagramFeed} from '@/services/instagram';
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default async function InstagramPage() {
   const posts = await getInstagramFeed();
@@ -28,13 +29,28 @@ export default async function InstagramPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {posts.map(post => (
-                <div key={post.id} className="bg-transparent">
-                  <div dangerouslySetInnerHTML={{__html: post.embedHtml}} />
-                </div>
-              ))}
-            </div>
+            {posts && posts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {posts.map(post => (
+                  <div key={post.id} className="bg-transparent">
+                    <div dangerouslySetInnerHTML={{__html: post.embedHtml}} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div>
+                Failed to load Instagram feed. Please check our{' '}
+                <Link
+                  href="https://www.instagram.com/galwaydodgeball"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary"
+                >
+                  Instagram page
+                </Link>{' '}
+                for more details.
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
