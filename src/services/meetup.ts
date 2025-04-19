@@ -72,30 +72,35 @@ export async function getUpcomingEvents(): Promise<MeetupEvent[]> {
       body: JSON.stringify(graphqlQuery),
     });
 
-    const data = await response.json();
+    // Wrap the JSON parsing in a try-catch block to handle parsing errors
+    try {
+      const data = await response.json();
 
-    if (!data.data || !data.data.groupByUrlname || !data.data.groupByUrlname.events) {
-      console.error("Failed to fetch events from Meetup API", data);
+      if (!data.data || !data.data.groupByUrlname || !data.data.groupByUrlname.events) {
+        console.error("Failed to fetch events from Meetup API", data);
+        return [];
+      }
+
+      const eventsData = data.data.groupByUrlname.events.edges;
+
+      const events: MeetupEvent[] = eventsData.map((event: any) => {
+        return {
+          id: event.node.id,
+          name: event.node.title,
+          url: event.node.eventUrl,
+          description: event.node.description,
+          time: new Date(event.node.dateTime).toLocaleString(), // Format the date and time
+        };
+      });
+
+      return events;
+    } catch (jsonError) {
+      console.error("Error parsing JSON response from Meetup API:", jsonError);
       return [];
     }
-
-    const eventsData = data.data.groupByUrlname.events.edges;
-
-    const events: MeetupEvent[] = eventsData.map((event: any) => {
-      return {
-        id: event.node.id,
-        name: event.node.title,
-        url: event.node.eventUrl,
-        description: event.node.description,
-        time: new Date(event.node.dateTime).toLocaleString(), // Format the date and time
-      };
-    });
-
-    return events;
   } catch (error) {
     console.error("Error fetching Meetup events:", error);
     return [];
   }
 }
-
     
