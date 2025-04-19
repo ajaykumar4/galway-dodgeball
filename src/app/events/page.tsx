@@ -1,3 +1,5 @@
+'use server';
+
 import {getUpcomingEvents} from '@/services/meetup';
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 import Image from 'next/image';
@@ -7,51 +9,49 @@ export default async function EventsPage() {
   const events = await getUpcomingEvents();
 
   return (
-    
-      
-        
-      
-      
-        
-          
-            Upcoming Events
-          
-          
-            Stay updated on our latest dodgeball events.
-          
-        
-        
-          
+    <div className="relative min-h-screen flex items-center justify-center">
+      <Image
+        src="https://picsum.photos/1920/1080"
+        alt="Dodgeball Background"
+        layout="fill"
+        objectFit="cover"
+        className="absolute top-0 left-0 w-full h-full -z-10"
+      />
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0"></div>
+      <div className="container mx-auto py-10 px-4">
+        <Card className="relative bg-transparent z-10 border-none shadow-none">
+          <CardHeader>
+            <CardTitle>Upcoming Events</CardTitle>
+            <CardDescription className="text-muted-foreground text-center">Stay updated on our latest dodgeball events.</CardDescription>
+          </CardHeader>
+          <CardContent>
             {events && events.length > 0 ? (
               events.map(event => (
-                
-                  
-                    
-                      {event.name}
-                    
-                  
-                  
-                    
-                      {event.time}
-                      {event.description}
+                <Card key={event.id} className="mb-4 bg-transparent">
+                  <CardHeader>
+                    <CardTitle>{event.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{event.time}</p>
+                    <p>{event.description}</p>
+                    <Link href={event.url} className="text-primary">
                       Learn More
-                    
-                  
-                
+                    </Link>
+                  </CardContent>
+                </Card>
               ))
             ) : (
-              
+              <div>
                 No upcoming events found. Please check our{' '}
-                
+                <Link href="https://www.meetup.com/galway-dodgeball-club" target="_blank" rel="noopener noreferrer">
                   Meetup page
-                {' '}
+                </Link>{' '}
                 for more details.
-              
+              </div>
             )}
-          
-        
-      
-    
+          </CardContent>
+        </Card>
+      </div>
+    </div>
   );
 }
-
