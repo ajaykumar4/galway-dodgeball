@@ -45,7 +45,7 @@ export async function getUpcomingEvents(): Promise<MeetupEvent[]> {
         groupByUrlname(urlname: "${groupId}") {
           name
           id
-          events(input: { first: 5, status: UPCOMING }) {
+          events(input: { first: 4, status: UPCOMING }) {
             count
             edges {
               node {
@@ -103,4 +103,4 @@ export async function getUpcomingEvents(): Promise<MeetupEvent[]> {
     return [];
   }
 }
-    
+
