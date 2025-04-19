@@ -5,21 +5,31 @@ import {Avatar, AvatarImage, AvatarFallback} from '@/components/ui/avatar';
 import Image from 'next/image';
 
 export default function AboutPage() {
-  const communityMembers = [
+  const committeeMembers = [
     {
-      name: 'John Doe',
-      role: 'Founder',
-      imageUrl: 'https://picsum.photos/100/100', // Placeholder image
+      name: 'Colin O\'Halloran',
+      role: 'Chairman',
+      imageUrl: '/committee/colin-ohalloran.jpg', // Placeholder image
     },
     {
-      name: 'Jane Smith',
-      role: 'Team Lead',
-      imageUrl: 'https://picsum.photos/100/100', // Placeholder image
+      name: 'Anne Liston',
+      role: 'Secretary',
+      imageUrl: '/committee/anne-liston.jpg', // Placeholder image
     },
     {
-      name: 'David Lee',
-      role: 'Player',
-      imageUrl: 'https://picsum.photos/100/100', // Placeholder image
+      name: 'Katie',
+      role: 'Treasurer',
+      imageUrl: '/committee/katie.jpg', // Placeholder image
+    },
+    {
+      name: 'Alan De Grás',
+      role: 'P.R.O.',
+      imageUrl: '/committee/alan-degras.jpg', // Placeholder image
+    },
+    {
+      name: 'Andrea Berry Berardi',
+      role: 'Coach',
+      imageUrl: '/committee/andrea-berry.jpg', // Placeholder image
     },
   ];
 
@@ -63,9 +73,9 @@ export default function AboutPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-2">Community Members</h2>
+              <h2 className="text-xl font-semibold mb-2">Committee Members</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-                {communityMembers.map((member, index) => (
+                {committeeMembers.map((member, index) => (
                   <div key={index} className="flex flex-col items-center">
                     <Avatar className="h-24 w-24 mb-2">
                       <AvatarImage src={member.imageUrl} alt={member.name} />
