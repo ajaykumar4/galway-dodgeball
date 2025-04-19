@@ -1,8 +1,9 @@
-
+'use client';
 
 import {getUpcomingEvents} from '@/services/meetup';
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default async function EventsPage() {
   const events = await getUpcomingEvents();
@@ -25,7 +26,7 @@ export default async function EventsPage() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {events.length > 0 ? (
+              {events && events.length > 0 ? (
                 events.map(event => (
                   <Card key={event.id} className="mb-4 bg-transparent">
                     <CardHeader>
@@ -46,7 +47,18 @@ export default async function EventsPage() {
                   </Card>
                 ))
               ) : (
-                <p>No upcoming events found.</p>
+                <p>
+                  No upcoming events found. Please check our{' '}
+                  <Link
+                    href="https://www.meetup.com/galway-dodgeball-club"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary"
+                  >
+                    Meetup page
+                  </Link>{' '}
+                  for more details.
+                </p>
               )}
             </div>
           </CardContent>
