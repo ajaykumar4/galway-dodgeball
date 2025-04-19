@@ -1,3 +1,4 @@
+
 /**
  * Represents a Meetup event.
  */
@@ -25,27 +26,76 @@ export interface MeetupEvent {
 }
 
 /**
- * Asynchronously retrieves upcoming Meetup events.
+ * Asynchronously retrieves upcoming Meetup events using the Meetup GraphQL API.
  *
  * @returns A promise that resolves to an array of MeetupEvent objects.
  */
 export async function getUpcomingEvents(): Promise<MeetupEvent[]> {
-  // TODO: Implement this by calling the Meetup API.
+  const apiKey = process.env.MEETUP_API_KEY;
+  const groupId = process.env.MEETUP_GROUP_ID;
 
-  return [
-    {
-      id: '1',
-      name: 'Galway Dodgeball Meetup',
-      url: 'https://www.meetup.com/galway-dodgeball/',
-      description: 'Join us for a fun game of dodgeball!',
-      time: 'Tuesday, 7:30 PM - 9:00 PM',
-    },
-    {
-      id: '2',
-      name: 'Galway Dodgeball Social',
-      url: 'https://www.meetup.com/galway-dodgeball/',
-      description: 'Join us for a social event after dodgeball!',
-      time: 'Tuesday, 9:00 PM - 10:00 PM',
-    },
-  ];
+  if (!apiKey || !groupId) {
+    console.error("Meetup API key or group ID not found in environment variables.");
+    return [];
+  }
+
+  const graphqlQuery = {
+    query: `
+      query {
+        groupByUrlname(urlname: "${groupId}") {
+          name
+          id
+          events(input: { first: 5, status: UPCOMING }) {
+            count
+            edges {
+              node {
+                id
+                title
+                description
+                eventUrl
+                dateTime
+              }
+            }
+          }
+        }
+      }
+    `,
+  };
+
+  try {
+    const response = await fetch("https://api.meetup.com/gql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify(graphqlQuery),
+    });
+
+    const data = await response.json();
+
+    if (!data.data || !data.data.groupByUrlname || !data.data.groupByUrlname.events) {
+      console.error("Failed to fetch events from Meetup API", data);
+      return [];
+    }
+
+    const eventsData = data.data.groupByUrlname.events.edges;
+
+    const events: MeetupEvent[] = eventsData.map((event: any) => {
+      return {
+        id: event.node.id,
+        name: event.node.title,
+        url: event.node.eventUrl,
+        description: event.node.description,
+        time: new Date(event.node.dateTime).toLocaleString(), // Format the date and time
+      };
+    });
+
+    return events;
+  } catch (error) {
+    console.error("Error fetching Meetup events:", error);
+    return [];
+  }
 }
+
+    
