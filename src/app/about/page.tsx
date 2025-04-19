@@ -9,27 +9,37 @@ export default function AboutPage() {
     {
       name: 'Colin O\'Halloran',
       role: 'Chairman',
-      imageUrl: '/committee/colin-ohalloran.jpg', // Placeholder image
+      imageUrl: '/committee/colin-ohalloran.jpg', 
     },
     {
       name: 'Anne Liston',
       role: 'Secretary',
-      imageUrl: '/committee/anne-liston.jpg', // Placeholder image
+      imageUrl: '/committee/anne-liston.jpg', 
     },
     {
       name: 'Katie',
       role: 'Treasurer',
-      imageUrl: '/committee/katie.jpg', // Placeholder image
+      imageUrl: '/committee/katie.jpg', 
     },
     {
       name: 'Alan De Grás',
       role: 'P.R.O.',
-      imageUrl: '/committee/alan-degras.jpg', // Placeholder image
+      imageUrl: '/committee/alan-degras.jpg', 
+    },
+    {
+      name: 'Alex Potter',
+      role: 'P.R.O.',
+      imageUrl: '/committee/alex-potter.jpg', 
     },
     {
       name: 'Andrea Berry Berardi',
       role: 'Coach',
-      imageUrl: '/committee/andrea-berry.jpg', // Placeholder image
+      imageUrl: '/committee/andrea-berry.jpg', 
+    },
+    {
+      name: 'Edel Moran',
+      role: 'Coach',
+      imageUrl: '/committee/edel-moran.jpg', 
     },
   ];
 
