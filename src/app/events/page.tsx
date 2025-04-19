@@ -21,7 +21,7 @@ export default async function EventsPage() {
       <div className="container mx-auto py-10 px-4">
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
-            <CardTitle>Upcoming Events</CardTitle>
+            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground flex items-center justify-center">Upcoming Events</CardTitle>
             <CardDescription className="text-muted-foreground text-center">Stay updated on our latest dodgeball events.</CardDescription>
           </CardHeader>
           <CardContent>
@@ -43,7 +43,7 @@ export default async function EventsPage() {
             ) : (
               <div>
                 No upcoming events found. Please check our{' '}
-                <Link href="https://www.meetup.com/galway-dodgeball-club" target="_blank" rel="noopener noreferrer">
+                <Link href="https://www.meetup.com/galway-dodgeball-club" target="_blank" rel="noopener noreferrer"  className="text-primary">
                   Meetup page
                 </Link>{' '}
                 for more details.
@@ -55,3 +55,4 @@ export default async function EventsPage() {
     </div>
   );
 }
+
