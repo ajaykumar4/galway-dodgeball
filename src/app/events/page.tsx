@@ -42,7 +42,7 @@ export default async function EventsPage() {
               ))
             ) : (
               <div>
-                No upcoming events found. Please check our{' '}
+                Failed to load upcoming events. Please check our{' '}
                 <Link href="https://www.meetup.com/galway-dodgeball-club" target="_blank" rel="noopener noreferrer"  className="text-primary">
                   Meetup page
                 </Link>{' '}
