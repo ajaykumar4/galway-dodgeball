@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import InstagramEmbed from '@/components/InstagramEmbed';
 
 async function getInstagramLinks() {
   const url = 'https://www.instagram.com/galwaydodgeball/';
@@ -71,7 +70,15 @@ export default async function InstagramPage() {
                 {links && links.length > 0 ? (
                   links.slice(0, 6).map((link, index) => (
                     <div key={index}>
-                      <InstagramEmbed permalink={`https://www.instagram.com${link}`} />
+                      <iframe
+                        src={`https://www.instagram.com/p${link.includes('reel') ? 'reel' : 'p'}${link.substring(link.lastIndexOf('/'))}/embed`}
+                        width="320"
+                        height="440"
+                        style={{ border: "none", overflow: "hidden" }}
+                        scrolling="no"
+                        allowtransparency="true"
+                        allowfullscreen="true"
+                      ></iframe>
                     </div>
                   ))
                 ) : (
@@ -96,4 +103,3 @@ export default async function InstagramPage() {
     </div>
   );
 }
-
