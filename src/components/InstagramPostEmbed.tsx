@@ -59,4 +59,5 @@ const InstagramPostEmbed: React.FC<Props> = ({permalink}) => {
   );
 };
 
-export default InstagramReelEmbed;
+export default InstagramPostEmbed;
+
