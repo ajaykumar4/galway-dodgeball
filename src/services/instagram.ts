@@ -1,15 +1,19 @@
 'use server';
 
-import { JSDOM } from 'jsdom';
-
 /**
  * Asynchronously retrieves Instagram post links by crawling the specified Instagram page.
  * It extracts href attributes from &lt;a&gt; tags within &lt;article&gt; elements.
  *
- * @returns {Promise&lt;string[]&gt;} A promise that resolves to an array of strings, each representing an Instagram post URL.
+ * @returns {Promise<string[]>} A promise that resolves to an array of strings, each representing an Instagram post URL.
  * Returns an empty array in case of failure.
  */
-async function getInstagramLinks(): Promise<string[]> {
+
+export interface InstagramItem {
+  type: 'reel' | 'post';
+  href: string;
+}
+
+async function getInstagramLinks(): Promise<InstagramItem[]> {
   const url = 'https://www.instagram.com/galwaydodgeball/';
 
   try {
@@ -20,23 +24,28 @@ async function getInstagramLinks(): Promise<string[]> {
     }
 
     const html = await response.text();
-    const dom = new JSDOM(html);
-    const document = dom.window.document;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
 
-    const articleElements = document.querySelectorAll('article');
-    const links: string[] = [];
+    const articleElements = doc.querySelectorAll('article');
+    const items: InstagramItem[] = [];
 
     articleElements.forEach(article => {
-      const aTags = article.querySelectorAll('a');
+      const aTags = article.querySelectorAll('a[role="link"][tabindex="0"]');
       aTags.forEach(aTag => {
         const href = aTag.getAttribute('href');
         if (href) {
-          links.push(href);
+          let type: 'reel' | 'post' = 'post';
+          if (href.includes('/reel/')) {
+            type = 'reel';
+          }
+          items.push({ type: type, href: `https://www.instagram.com${href}` });
         }
       });
     });
 
-    return links;
+    console.log('Items:', items);
+    return items;
   } catch (error) {
     console.error("Error fetching Instagram page:", error);
     return [];
@@ -44,4 +53,3 @@ async function getInstagramLinks(): Promise<string[]> {
 }
 
 export default getInstagramLinks;
-

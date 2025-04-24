@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import InstagramPostEmbed from '@/components/InstagramPostEmbed';
-import InstagramReelEmbed from '@/components/InstagramReelEmbed';
 
 interface InstagramItem {
   type: 'reel' | 'post';
@@ -12,16 +11,48 @@ interface InstagramItem {
 }
 
 export default function InstagramPage() {
-  const items: InstagramItem[] = [
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-  ];
+  const [items, setItems] = useState<InstagramItem[]>([]);
+
+  useEffect(() => {
+    async function getInstagramLinks() {
+      const url = 'https://www.instagram.com/galwaydodgeball/';
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          console.error(`Failed to fetch Instagram page: ${response.status} ${response.statusText}`);
+          return;
+        }
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const articleElements = doc.querySelectorAll('article');
+        const newItems: InstagramItem[] = [];
+
+        articleElements.forEach(article => {
+          const aTags = article.querySelectorAll('a[role="link"][tabindex="0"]');
+          aTags.forEach(aTag => {
+            const href = aTag.getAttribute('href');
+            if (href) {
+              let type: 'reel' | 'post' = 'post';
+              if (href.includes('/reel/')) {
+                type = 'reel';
+              }
+              newItems.push({ type: type, href: `https://www.instagram.com${href}` });
+            }
+          });
+        });
+
+        setItems(newItems);
+        console.log('Items:', newItems);
+      } catch (error) {
+        console.error("Error fetching Instagram page:", error);
+      }
+    }
+
+    getInstagramLinks();
+  }, []);
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -48,19 +79,30 @@ export default function InstagramPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {items.map((item, index) => (
                   <div key={index}>
-                    {item.type === 'reel' ? (
-                      <InstagramReelEmbed permalink={item.href} />
-                    ) : (
+                    
                       <InstagramPostEmbed permalink={item.href} />
-                    )}
+                  
                   </div>
                 ))}
               </div>
             </section>
+            {items.length === 0 && (
+              <div>
+                Failed to load Instagram feed. Please check our{' '}
+                <Link
+                  href="https://www.instagram.com/galwaydodgeball"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"
+                >
+                  Instagram page
+                </Link>{' '}
+                for more details.
+              </div>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 }
-
