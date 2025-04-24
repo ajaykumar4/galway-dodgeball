@@ -13,7 +13,7 @@ export interface InstagramItem {
   href: string;
 }
 
-async function getInstagramLinks(): Promise<InstagramItem[]> {
+export async function getInstagramLinks(): Promise<InstagramItem[]> {
   const url = 'https://www.instagram.com/galwaydodgeball/';
 
   try {
@@ -51,5 +51,3 @@ async function getInstagramLinks(): Promise<InstagramItem[]> {
     return [];
   }
 }
-
-export default getInstagramLinks;
