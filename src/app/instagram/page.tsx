@@ -7,7 +7,7 @@ import Link from 'next/link';
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 import Image from 'next/image';
 
-export default function InstagramPage() {
+export default async function InstagramPage() {
   const reels = Array(3).fill("https://www.instagram.com/reel/C_d5wf3gHai/");
   const posts = Array(3).fill("https://www.instagram.com/p/DGI3MrDs3Xc/");
 
