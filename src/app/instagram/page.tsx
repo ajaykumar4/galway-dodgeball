@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
+import React, { useEffect } from 'react';
+import { runInstagramScraper } from '@/services/instagram';
 import Image from 'next/image';
 import InstagramPostEmbed from '@/components/InstagramPostEmbed';
 import InstagramReelEmbed from '@/components/InstagramReelEmbed';
@@ -12,6 +12,10 @@ interface InstagramItem {
 }
 
 export default function InstagramPage() {
+  useEffect(() => {
+    runInstagramScraper();
+  }, []);
+
   const items: InstagramItem[] = [
     { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
     { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
