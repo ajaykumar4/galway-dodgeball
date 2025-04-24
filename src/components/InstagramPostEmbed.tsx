@@ -60,4 +60,3 @@ const InstagramPostEmbed: React.FC<Props> = ({permalink}) => {
 };
 
 export default InstagramPostEmbed;
-

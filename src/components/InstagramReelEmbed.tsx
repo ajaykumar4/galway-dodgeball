@@ -37,9 +37,7 @@ const InstagramReelEmbed: React.FC<Props> = ({permalink}) => {
             </div>
             <div style="margin-left: 8px;">
               <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div>
-              <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div>
-            </div>
-            <div style="margin-left: auto;">
+              <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;">
               <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div>
               <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div>
               <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div>
@@ -59,4 +57,4 @@ const InstagramReelEmbed: React.FC<Props> = ({permalink}) => {
   );
 };
 
-export default InstagramPostEmbed;
+export default InstagramReelEmbed;
