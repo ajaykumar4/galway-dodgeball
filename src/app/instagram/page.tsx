@@ -18,7 +18,12 @@ export default function InstagramPage() {
       const url = 'https://www.instagram.com/galwaydodgeball/';
 
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          mode: 'cors', // Specify CORS mode
+          headers: {
+            'Access-Control-Allow-Origin': '*', // Allow all origins
+          },
+        });
         if (!response.ok) {
           console.error(`Failed to fetch Instagram page: ${response.status} ${response.statusText}`);
           return;
