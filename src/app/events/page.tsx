@@ -26,20 +26,24 @@ export default async function EventsPage() {
           </CardHeader>
           <CardContent>
             {events && events.length > 0 ? (
-              events.map(event => (
-                <Card key={event.id} className="mb-4 bg-transparent">
-                  <CardHeader>
-                    <CardTitle>{event.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{event.time}</p>
-                    <p>{event.description}</p>
-                    <Link href={event.url} className="text-primary">
-                      Learn More
-                    </Link>
-                  </CardContent>
-                </Card>
-              ))
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {events.map(event => (
+                  <Card key={event.id} className="mb-4 bg-transparent h-full flex flex-col">
+                    <CardHeader>
+                      <CardTitle>{event.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex flex-col justify-between">
+                      <div>
+                        <p className="mb-2">{event.time}</p>
+                        <p className="mb-2">{event.description}</p>
+                      </div>
+                      <Link href={event.url} className="text-primary">
+                        Learn More
+                      </Link>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             ) : (
               <div>
                 Failed to load upcoming events. Please check our{' '}
@@ -55,4 +59,3 @@ export default async function EventsPage() {
     </div>
   );
 }
-
