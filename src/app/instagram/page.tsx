@@ -1,9 +1,9 @@
 'use server';
 
 import React from 'react';
-import InstagramEmbed from '@/components/InstagramEmbed';
 import Link from 'next/link';
 import Image from 'next/image';
+import InstagramEmbed from '@/components/InstagramEmbed';
 
 async function getInstagramLinks() {
   const url = 'https://www.instagram.com/galwaydodgeball/';
@@ -29,9 +29,7 @@ async function getInstagramLinks() {
       }
     });
 
-    const posts = links.filter(link => link.startsWith('/galwaydodgeball/p/'));
-    const reels = links.filter(link => link.startsWith('/galwaydodgeball/reel/'));
-    return posts.concat(reels);
+    return links.filter(link => link.startsWith('/galwaydodgeball/p/') || link.startsWith('/galwaydodgeball/reel/'));
 
   } catch (error) {
     console.error('Error fetching Instagram page:', error);
@@ -93,3 +91,4 @@ export default async function InstagramPage() {
     </div>
   );
 }
+
