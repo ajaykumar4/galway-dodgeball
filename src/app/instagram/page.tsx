@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import InstagramEmbed from '@/components/InstagramEmbed';
+import InstagramEmbed from '@/components/InstagramPostEmbed';
 
 async function getInstagramLinks() {
   const url = 'https://www.instagram.com/galwaydodgeball/';
