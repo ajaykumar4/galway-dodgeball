@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import InstagramEmbed from '@/components/InstagramPostEmbed';
+import InstagramEmbed from '@/components/InstagramEmbed';
 
 async function getInstagramLinks() {
   const url = 'https://www.instagram.com/galwaydodgeball/';
@@ -13,6 +13,11 @@ async function getInstagramLinks() {
 
     if (!response.ok) {
       console.error(`Failed to fetch Instagram page: ${response.status} ${response.statusText}`);
+      // Handle 429 Too Many Requests error
+      if (response.status === 429) {
+        console.warn("Rate limited by Instagram. Consider implementing a delay or using a different approach.");
+        return [];
+      }
       return [];
     }
 
