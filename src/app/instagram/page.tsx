@@ -42,7 +42,10 @@ async function getInstagramLinks() {
 }
 
 export default async function InstagramPage() {
-  const links = await getInstagramLinks();
+  const reelUrl = "https://www.instagram.com/reel/C_d5wf3gHai/";
+  const postUrl = "https://www.instagram.com/p/DGI3MrDs3Xc/";
+
+  const items = Array(4).fill(reelUrl).concat(Array(4).fill(postUrl));
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -66,35 +69,20 @@ export default async function InstagramPage() {
           </div>
           <div>
             <section className="mb-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {links && links.length > 0 ? (
-                  links.slice(0, 6).map((link, index) => (
-                    <div key={index}>
-                      <iframe
-                        src={`https://www.instagram.com/p${link.includes('reel') ? 'reel' : 'p'}${link.substring(link.lastIndexOf('/'))}/embed`}
-                        width="320"
-                        height="440"
-                        style={{ border: "none", overflow: "hidden" }}
-                        scrolling="no"
-                        allowtransparency="true"
-                        allowfullscreen="true"
-                      ></iframe>
-                    </div>
-                  ))
-                ) : (
-                  <div>
-                    Failed to load Instagram feed. Please check our{' '}
-                    <Link
-                      href="https://www.instagram.com/galwaydodgeball"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"
-                    >
-                      Instagram page
-                    </Link>{' '}
-                    for more details.
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {items.map((item, index) => (
+                  <div key={index}>
+                    <iframe
+                      src={`${item}/embed`}
+                      width="320"
+                      height="440"
+                      style={{ border: "none", overflow: "hidden" }}
+                      scrolling="no"
+                      allowtransparency="true"
+                      allowfullscreen="true"
+                    ></iframe>
                   </div>
-                )}
+                ))}
               </div>
             </section>
           </div>
