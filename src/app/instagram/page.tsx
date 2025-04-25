@@ -17,8 +17,16 @@ export default function InstagramPage() {
 
   useEffect(() => {
     async function loadInstagramFeed() {
-      const feed = await getInstagramLinks();
-      setItems(feed);
+      try {
+        const feed = await getInstagramLinks();
+        if (feed) {
+          setItems(feed);
+        } else {
+          console.error("Failed to load Instagram feed: getInstagramLinks returned undefined or null");
+        }
+      } catch (error) {
+        console.error("Error loading Instagram feed:", error);
+      }
     }
 
     loadInstagramFeed();
@@ -47,7 +55,7 @@ export default function InstagramPage() {
           <div>
             <section className="mb-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {items.length > 0 ? (
+                {items && items.length > 0 ? (
                   items.map((item, index) => (
                     <div key={index}>
                       {item.type === 'reel' ? (
