@@ -1,6 +1,7 @@
 'use server';
 
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
+import * as chromium from '@sparticuz/chromium'
 
 export interface InstagramPost {
   type: 'reel' | 'post';
@@ -12,8 +13,12 @@ export async function runInstagramScraper(): Promise<InstagramPost[]> {
   let browser: puppeteer.Browser | null = null;
 
   try {
-    browser = await puppeteer.launch({
-      headless: 'new',
+    const browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
+      ignoreDefaultArgs: ['--disable-extensions'],
     });
     const page = await browser.newPage();
 
@@ -36,6 +41,7 @@ export async function runInstagramScraper(): Promise<InstagramPost[]> {
         return elements
           .filter(element => element.querySelector('img')) // Only include <a> tags that have an <img> child
           .map(element => {
+            const img = element.querySelector('img');
             return {
               href: element.href
             };
