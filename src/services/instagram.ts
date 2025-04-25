@@ -14,7 +14,15 @@ export async function runInstagramScraper() {
   try {
     browser = await puppeteer.launch({ headless: 'new' });
       const page = await browser.newPage();
-      await page.goto(url);
+      await page.goto(url, { waitUntil: 'networkidle2' });
+
+      // Log all web elements on the page
+      const allElements = await page.$$('*');
+      console.log('All Web Elements on Instagram Page:');
+      for (const element of allElements) {
+          const tagName = await element.evaluate(node => node.tagName);
+          console.log(tagName);
+      }
 
       // Wait for the articles to load (you might need to adjust the selector and waiting time)
       await page.waitForSelector('article');
