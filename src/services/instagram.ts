@@ -5,12 +5,9 @@ import puppeteer from 'puppeteer';
 interface InstagramItem {
   type: 'reel' | 'post';
   href: string;
-  alt: string;
 }
 
-const MAX_RETRIES = 3;
-
-async function runInstagramScraper(retries = 0): Promise<InstagramItem[]> {
+async function runInstagramScraper(): Promise<InstagramItem[]> {
   const url = 'https://www.instagram.com/galwaydodgeball/';
   let browser: puppeteer.Browser | null = null;
 
@@ -36,13 +33,10 @@ async function runInstagramScraper(retries = 0): Promise<InstagramItem[]> {
         return elements
           .filter(element => element.querySelector('img'))
           .map(element => {
-            const img = element.querySelector('img');
             const href = element.href;
-            const alt = img ? img.alt : '';
             let type: 'reel' | 'post' = href.includes('/reel/') ? 'reel' : 'post';
             return {
               href,
-              alt,
               type,
             };
           });
@@ -53,14 +47,7 @@ async function runInstagramScraper(retries = 0): Promise<InstagramItem[]> {
     return items;
   } catch (error: any) {
     console.error('Error during scraping:', error.message);
-    if (retries < MAX_RETRIES) {
-      console.log(`Retrying... (${retries + 1}/${MAX_RETRIES})`);
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Wait before retrying
-      return runInstagramScraper(retries + 1); // Recursive call to retry
-    } else {
-      console.error('Max retries reached. Giving up.');
-      return [];
-    }
+    return [];
   } finally {
     if (browser) {
       await browser.close();
@@ -70,3 +57,4 @@ async function runInstagramScraper(retries = 0): Promise<InstagramItem[]> {
 }
 
 export {runInstagramScraper};
+
