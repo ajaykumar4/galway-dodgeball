@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import InstagramPostEmbed from '@/components/InstagramPostEmbed';
 import InstagramReelEmbed from '@/components/InstagramReelEmbed';
-import {getInstagramLinks} from '@/services/instagram';
+import {runInstagramScraper} from '@/services/instagram';
 
 interface InstagramItem {
   type: 'reel' | 'post';
@@ -18,12 +18,13 @@ export default function InstagramPage() {
   useEffect(() => {
     async function loadInstagramFeed() {
       try {
-        const feed = await getInstagramLinks();
-        if (feed) {
-          setItems(feed);
-        } else {
-          console.error("Failed to load Instagram feed: getInstagramLinks returned undefined or null");
-        }
+        // const feed = await getInstagramLinks();
+        // if (feed) {
+        //   setItems(feed);
+        // } else {
+        //   console.error("Failed to load Instagram feed: getInstagramLinks returned undefined or null");
+        // }
+        await runInstagramScraper();
       } catch (error) {
         console.error("Error loading Instagram feed:", error);
       }
