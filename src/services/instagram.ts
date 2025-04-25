@@ -2,12 +2,12 @@
 
 import puppeteer from 'puppeteer';
 
-interface InstagramItem {
+export interface InstagramPost {
   type: 'reel' | 'post';
   href: string;
 }
 
-async function runInstagramScraper(): Promise<InstagramItem[]> {
+export async function runInstagramScraper(): Promise<InstagramPost[]> {
   const url = 'https://www.instagram.com/galwaydodgeball/';
   let browser: puppeteer.Browser | null = null;
 
@@ -25,29 +25,41 @@ async function runInstagramScraper(): Promise<InstagramItem[]> {
 
     await new Promise(resolve => setTimeout(resolve, 5000));
 
+    // Extract all article elements from the page
     const articles = await page.$$('article');
 
-    const items: InstagramItem[] = [];
+    const posts: InstagramPost[] = [];
+    
     for (const article of articles) {
+      // Find all <a> tags within the article that have an <img> tag as a child
       const aTags = await article.$$eval('a', (elements: HTMLAnchorElement[]) => {
         return elements
-          .filter(element => element.querySelector('img'))
+          .filter(element => element.querySelector('img')) // Only include <a> tags that have an <img> child
           .map(element => {
-            const href = element.href;
-            let type: 'reel' | 'post' = href.includes('/reel/') ? 'reel' : 'post';
             return {
-              href,
-              type,
+              href: element.href
             };
           });
       });
-      items.push(...aTags);
+      for (const aTag of aTags) {
+        if (aTag.href.includes('/reel/')) {
+          posts.push({
+                href: aTag.href,
+                type: 'reel',
+            });
+        } else if (aTag.href.includes('/p/')) {
+            posts.push({
+              href: aTag.href,
+              type: 'post',
+            });
+        }
+      }
     }
-    console.log('Items', items);
-    return items;
+    console.log('posts', posts);
+    return posts;
   } catch (error: any) {
     console.error('Error during scraping:', error.message);
-    return [];
+    return [] ;
   } finally {
     if (browser) {
       await browser.close();
@@ -55,6 +67,3 @@ async function runInstagramScraper(): Promise<InstagramItem[]> {
     }
   }
 }
-
-export {runInstagramScraper};
-
