@@ -17,65 +17,44 @@ export interface InstagramItem {
 
 export async function getInstagramLinks(): Promise<InstagramItem[]> {
   const url = 'https://www.instagram.com/galwaydodgeball/';
-
+  let browser;
   try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      console.error(`Failed to fetch Instagram page: ${response.status} ${response.statusText}`);
+    browser = await puppeteer.launch({ headless: 'new' });
+    const page = await browser.newPage();
+
+    try {
+      await page.goto(url, { waitUntil: 'networkidle2' });
+    } catch (error) {
+      console.error('Error navigating to the page:', error);
       return [];
     }
 
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
+    // Wait for the articles to load (you might need to adjust the selector and waiting time)
+    await page.waitForSelector('article');
+    const articleElements = await page.$$('article');
+    console.log('Article Elements:', articleElements);
 
-    const articleElements = doc.querySelectorAll('article');
     const items: InstagramItem[] = [];
 
-    articleElements.forEach(article => {
-      const aTags = article.querySelectorAll('a[role="link"][tabindex="0"]');
-      aTags.forEach(aTag => {
-        const href = aTag.getAttribute('href');
+    for (const articleHandle of articleElements) {
+      const aTags = await articleHandle.$$('a[role="link"][tabindex="0"]');
+      for (const aTag of aTags) {
+        const href = await aTag.evaluate(node => node.getAttribute('href'));
         if (href) {
+          const fullHref = `https://www.instagram.com${href}`;
           let type: 'reel' | 'post' = 'post';
           if (href.includes('/reel/')) {
             type = 'reel';
           }
-          items.push({ type: type, href: `https://www.instagram.com${href}` });
+          items.push({ type: type, href: fullHref });
         }
-      });
-    });
-
+      }
+    }
     console.log('Items:', items);
     return items;
-  } catch (error) {
-    console.error("Error fetching Instagram page:", error);
-    return [];
-  }
-}
-
-export async function runInstagramScraper() {
-  const url = 'https://www.instagram.com/galwaydodgeball/';
-  let browser;
-  try {
-    browser = await puppeteer.launch({ headless: 'new' });
-      const page = await browser.newPage();
-      await page.goto(url);
-
-      // Wait for the articles to load (you might need to adjust the selector and waiting time)
-      await page.waitForSelector('article');
-      const articleHandles = await page.$$('article');
-      for (const articleHandle of articleHandles) {
-          const aTags = await articleHandle.$$('a');
-          for (const aTag of aTags) {
-              const href = await aTag.evaluate(node => node.getAttribute('href'));
-              if (href) {
-                  console.log('Article Link:', `https://www.instagram.com${href}`);
-              }
-          }
-      }
   } catch (error: any) {
     console.error('Error during scraping:', error.message);
+    return [];
   } finally {
     if (browser) {
       await browser.close();

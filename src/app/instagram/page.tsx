@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { runInstagramScraper } from '@/services/instagram';
+import React, {useEffect, useState} from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import InstagramPostEmbed from '@/components/InstagramPostEmbed';
 import InstagramReelEmbed from '@/components/InstagramReelEmbed';
+import {getInstagramLinks} from '@/services/instagram';
 
 interface InstagramItem {
   type: 'reel' | 'post';
@@ -12,20 +13,16 @@ interface InstagramItem {
 }
 
 export default function InstagramPage() {
-  useEffect(() => {
-    runInstagramScraper();
-  }, []);
+  const [items, setItems] = useState<InstagramItem[]>([]);
 
-  const items: InstagramItem[] = [
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-  ];
+  useEffect(() => {
+    async function loadInstagramFeed() {
+      const feed = await getInstagramLinks();
+      setItems(feed);
+    }
+
+    loadInstagramFeed();
+  }, []);
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -50,15 +47,30 @@ export default function InstagramPage() {
           <div>
             <section className="mb-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {items.map((item, index) => (
-                  <div key={index}>
-                    {item.type === 'reel' ? (
-                      <InstagramReelEmbed permalink={item.href} />
-                    ) : (
-                      <InstagramPostEmbed permalink={item.href} />
-                    )}
+                {items.length > 0 ? (
+                  items.map((item, index) => (
+                    <div key={index}>
+                      {item.type === 'reel' ? (
+                        <InstagramReelEmbed permalink={item.href} />
+                      ) : (
+                        <InstagramPostEmbed permalink={item.href} />
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <div>
+                    Failed to load Instagram feed. Please check our{' '}
+                    <Link
+                      href="https://www.instagram.com/galwaydodgeball"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"
+                    >
+                      Instagram page
+                    </Link>{' '}
+                    for more details.
                   </div>
-                ))}
+                )}
               </div>
             </section>
           </div>
@@ -67,4 +79,3 @@ export default function InstagramPage() {
     </div>
   );
 }
-
