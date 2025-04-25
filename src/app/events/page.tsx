@@ -1,12 +1,30 @@
 'use server';
 
-import {getUpcomingEvents} from '@/services/meetup';
+import {getCachedData} from '@/services/redis';
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
 
+const MEETUP_CACHE_KEY = 'meetup_events';
+
+async function getEventsFromRedis(): Promise<any[]> {
+  try {
+    const cachedData = await getCachedData(MEETUP_CACHE_KEY);
+    if (cachedData) {
+      console.log('Using cached Meetup data');
+      return JSON.parse(cachedData);
+    } else {
+      console.warn('No Meetup data found in Redis.');
+      return [];
+    }
+  } catch (error: any) {
+    console.error('Error fetching Meetup events from Redis:', error);
+    return [];
+  }
+}
+
 export default async function EventsPage() {
-  const events = await getUpcomingEvents();
+  const events = await getEventsFromRedis();
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -46,7 +64,7 @@ export default async function EventsPage() {
               </div>
             ) : (
               <div>
-                Failed to load upcoming events. Please check our{' '}
+                No upcoming events found. Please check our{' '}
                 <Link href="https://www.meetup.com/galway-dodgeball-club" target="_blank" rel="noopener noreferrer"  className="text-primary">
                   Meetup page
                 </Link>{' '}
@@ -59,3 +77,4 @@ export default async function EventsPage() {
     </div>
   );
 }
+

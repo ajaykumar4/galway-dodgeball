@@ -4,15 +4,33 @@ import Link from 'next/link';
 import Image from 'next/image';
 import InstagramPostEmbed from '@/components/InstagramPostEmbed';
 import InstagramReelEmbed from '@/components/InstagramReelEmbed';
-import {runInstagramScraper} from '@/services/instagram';
+import {getCachedData} from '@/services/redis';
 
 interface InstagramItem {
   type: 'reel' | 'post';
   href: string;
 }
 
+const INSTAGRAM_CACHE_KEY = 'instagram_feed';
+
+async function getInstagramFeedFromRedis(): Promise<InstagramItem[]> {
+  try {
+    const cachedData = await getCachedData(INSTAGRAM_CACHE_KEY);
+    if (cachedData) {
+      console.log('Using cached Instagram data');
+      return JSON.parse(cachedData);
+    } else {
+      console.warn('No Instagram data found in Redis.');
+      return [];
+    }
+  } catch (error: any) {
+    console.error('Error fetching Instagram data from Redis:', error);
+    return [];
+  }
+}
+
 export default async function InstagramPage() {
-  const posts = await runInstagramScraper();
+  const items = await getInstagramFeedFromRedis();
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -37,8 +55,8 @@ export default async function InstagramPage() {
           <div>
             <section className="mb-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {posts && posts.length > 0 ? (
-                  posts.map((item, index) => (
+                {items && items.length > 0 ? (
+                  items.map((item, index) => (
                     <div key={index}>
                       {item.type === 'reel' ? (
                         <InstagramReelEmbed permalink={item.href} />
