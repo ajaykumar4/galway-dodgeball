@@ -1,50 +1,45 @@
 'use client';
 
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
+import { getMeetupEvents, MeetupEvent } from '@/services/redis';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-interface Event {
-  id: string;
-  name: string;
+type Event = {
+  name: 'Dodgeball';
   time: string;
-  description: string;
-  url: string;
+  description: 'OUR LADY\'S BOYS CLUB, 11 Ely Place, Sea Road, Galway, Ireland, H91 R3K6';
+  url: string
 }
 
 export default function EventsPage() {
-  const events: Event[] = [
-    {
-      id: '1',
-      name: 'Galway Dodgeball - Weekly Session',
-      time: 'Every Tuesday, 7:30 PM',
-      description: 'Join us for our weekly dodgeball session. All skill levels welcome!',
-      url: 'https://www.meetup.com/galway-dodgeball-club',
-    },
-    {
-      id: '2',
-      name: 'Beginner Dodgeball Workshop',
-      time: 'Saturday, May 6th, 2:00 PM',
-      description: 'A workshop for those new to dodgeball. Learn the basics and have some fun!',
-      url: 'https://www.meetup.com/galway-dodgeball-club',
-    },
-    {
-      id: '3',
-      name: 'Advanced Dodgeball Clinic',
-      time: 'Sunday, May 14th, 10:00 AM',
-      description: 'For experienced players looking to improve their skills and strategy.',
-      url: 'https://www.meetup.com/galway-dodgeball-club',
-    },
-  ];
+  const [events, setEvents] = useState<Event[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const meetupEvents: MeetupEvent[] | null = await getMeetupEvents();
+
+      if (meetupEvents) {
+        const formattedEvents: Event[] = meetupEvents.map(event => ({
+          name: 'Dodgeball',
+          time: event.time,
+          description: 'OUR LADY\'S BOYS CLUB, 11 Ely Place, Sea Road, Galway, Ireland, H91 R3K6',
+          url: event.href
+        }));
+        setEvents(formattedEvents);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
-        layout="fill"
-        objectFit="cover"
-        className="absolute top-0 left-0 w-full h-full -z-10 rounded-md"
+        fill
+        className="absolute -z-10 rounded-md object-cover"
       />
       <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0 rounded-md"></div>
       <div className="container mx-auto py-10 px-4">
@@ -56,7 +51,7 @@ export default function EventsPage() {
           <CardContent>
             {events && events.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {events.map(event => (
+                {events.map((event, index) => (
                   <Card key={event.id} className="mb-4 bg-transparent h-full flex flex-col">
                     <CardHeader>
                       <CardTitle>{event.name}</CardTitle>

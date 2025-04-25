@@ -13,8 +13,7 @@ import (
 )
 
 var proxyHosts = []string{
-    "proxy1.example.com:8000",
-    "proxy2.example.com:8000",
+    "p.webshare.io:80",
 }
 
 func NewChromeCtx(useProxy bool) (context.Context, context.CancelFunc, error) {

@@ -17,7 +17,7 @@ func main() {
 
     scheduler := gocron.NewScheduler(time.UTC)
 
-    scheduler.Every(4).Hours().Do(func() {
+    scheduler.Every(30).Minutes().Do(func() {
         log.Println("🕓 Scheduled task running...")
         ScrapeInstagram()
         ScrapeMeetup()

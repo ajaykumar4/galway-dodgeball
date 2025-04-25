@@ -1,47 +1,36 @@
 version: '3.8'
 
 services:
-  website:
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    restart: unless-stopped
+
+  webscraper:
+    build:
+      context: ./web_scraper
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+    environment:
+      - REDIS_ADDR=redis:6379
+    volumes:
+      - ./web_scraper:/app
+    restart: unless-stopped
+    
+  ui:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "9002:9002" # Expose website port
+      - "3000:3000"
     depends_on:
       - redis
     environment:
-      - REDIS_URL=redis://redis:6379 # Use service name 'redis'
-      - NEXT_PUBLIC_PORT=9002 # Ensure port is consistent
-    env_file:
-      - .env # Load environment variables from .env file
-    volumes:
-      - .:/app # Mount the current directory (website code)
-      - /app/node_modules # Don't mount node_modules from host
-      - /app/.next # Don't mount .next from host
-    restart: unless-stopped
-
-  scraper:
-    build:
-      context: ./web_scraper
-      dockerfile: Dockerfile-scraper
-    depends_on:
-      - redis
-    environment:
-      - REDIS_ADDR=redis:6379 # Use service name 'redis'
-      # Add any scraper-specific env vars here or use an env_file
-      # - PROXY_USERNAME=${PROXY_USERNAME}
-      # - PROXY_PASSWORD=${PROXY_PASSWORD}
-    # Scraper doesn't need ports exposed typically
-    volumes:
-      - ./web_scraper:/app # Mount the scraper code
-    restart: unless-stopped
-
-  redis:
-    image: redis:7 # Use official Redis 7 image
-    ports:
-      - "6379:6379" # Expose Redis port to host (optional, for debugging)
-    volumes:
-      - redisdata:/data
+      - REDIS_URL=redis://redis:6379
     restart: unless-stopped
 
 volumes:

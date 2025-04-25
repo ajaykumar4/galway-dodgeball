@@ -1,28 +1,66 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import InstagramPostEmbed from '@/components/InstagramPostEmbed';
 import InstagramReelEmbed from '@/components/InstagramReelEmbed';
+import {getInstagramPosts} from '@/services/redis';
 
-interface InstagramItem {
-  type: 'reel' | 'post';
-  href: string;
+
+type InstagramPost = {
+    url: string;
+    type: 'reel' | 'post';
+};
+
+
+function InstagramPostList() {
+    const [posts, setPosts] = useState<InstagramPost[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<Error | null>(null);
+  
+    useEffect(() => {
+      async function fetchData() {
+        try {
+          const data = await getInstagramPosts();
+          setPosts(data);
+        } catch (err) {
+          setError(err as Error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+      fetchData();
+    }, []);
+  
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+  
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+  
+    if (!posts || posts.length === 0) {
+        return <div>No Instagram posts found.</div>;
+      }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {posts.map((post, index) => (
+            <div key={index}>
+              {post.type === 'reel' ? (
+                <InstagramReelEmbed permalink={post.url} />
+              ) : (
+                <InstagramPostEmbed permalink={post.url} />
+              )}
+            </div>
+          ))}
+        </div>
+  );
 }
 
 export default function InstagramPage() {
-  const items: InstagramItem[] = [
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-  ];
-
   return (
     <div className="relative min-h-screen flex items-center justify-center">
       <Image
@@ -44,33 +82,8 @@ export default function InstagramPage() {
             </div>
           </div>
           <div>
-            <section className="mb-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {items && items.length > 0 ? (
-                  items.map((item, index) => (
-                    <div key={index}>
-                      {item.type === 'reel' ? (
-                        <InstagramReelEmbed permalink={item.href} />
-                      ) : (
-                        <InstagramPostEmbed permalink={item.href} />
-                      )}
-                    </div>
-                  ))
-                ) : (
-                  <div>
-                    Failed to load Instagram feed. Please check our{' '}
-                    <Link
-                      href="https://www.instagram.com/galwaydodgeball"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"
-                    >
-                      Instagram page
-                    </Link>{' '}
-                    for more details.
-                  </div>
-                )}
-              </div>
+            <section className="mb-8">             
+                <InstagramPostList/>
             </section>
           </div>
         </div>
