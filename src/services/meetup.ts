@@ -1,4 +1,3 @@
-
 /**
  * Represents a Meetup event.
  */
@@ -72,6 +71,11 @@ export async function getUpcomingEvents(): Promise<MeetupEvent[]> {
       body: JSON.stringify(graphqlQuery),
     });
 
+    if (!response.ok) {
+        console.error(`Meetup API request failed with status: ${response.status}`);
+        return [];
+    }
+
     // Wrap the JSON parsing in a try-catch block to handle parsing errors
     try {
       const data = await response.json();
@@ -103,4 +107,3 @@ export async function getUpcomingEvents(): Promise<MeetupEvent[]> {
     return [];
   }
 }
-
