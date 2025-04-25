@@ -1,6 +1,5 @@
-'use client';
+'use server';
 
-import React, {useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import InstagramPostEmbed from '@/components/InstagramPostEmbed';
@@ -13,37 +12,7 @@ interface InstagramItem {
 }
 
 export default async function InstagramPage() {
-  let items: InstagramItem[] = [];
-  try {
-    const feed = await runInstagramScraper();
-    if (feed && feed.length > 0) {
-      items = feed;
-    } else {
-      console.error("Failed to load Instagram feed: runInstagramScraper returned undefined or null");
-      items = [
-        { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-        { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-        { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-        { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-        { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-        { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-        { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-        { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-      ];
-    }
-  } catch (error) {
-    console.error("Error loading Instagram feed:", error);
-    items = [
-      { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-      { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-      { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-      { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-      { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-      { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-      { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-      { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-    ];
-  }
+  const posts = await runInstagramScraper();
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -68,8 +37,8 @@ export default async function InstagramPage() {
           <div>
             <section className="mb-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {items && items.length > 0 ? (
-                  items.map((item, index) => (
+                {posts && posts.length > 0 ? (
+                  posts.map((item, index) => (
                     <div key={index}>
                       {item.type === 'reel' ? (
                         <InstagramReelEmbed permalink={item.href} />
