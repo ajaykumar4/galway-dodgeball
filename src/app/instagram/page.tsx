@@ -1,36 +1,27 @@
-'use server';
+'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import InstagramPostEmbed from '@/components/InstagramPostEmbed';
 import InstagramReelEmbed from '@/components/InstagramReelEmbed';
-import {getCachedData} from '@/services/redis';
 
 interface InstagramItem {
   type: 'reel' | 'post';
   href: string;
 }
 
-const INSTAGRAM_CACHE_KEY = 'instagram_feed';
-
-async function getInstagramFeedFromRedis(): Promise<InstagramItem[]> {
-  try {
-    const cachedData = await getCachedData(INSTAGRAM_CACHE_KEY);
-    if (cachedData) {
-      console.log('Using cached Instagram data');
-      return JSON.parse(cachedData);
-    } else {
-      console.warn('No Instagram data found in Redis.');
-      return [];
-    }
-  } catch (error: any) {
-    console.error('Error fetching Instagram data from Redis:', error);
-    return [];
-  }
-}
-
-export default async function InstagramPage() {
-  const items = await getInstagramFeedFromRedis();
+export default function InstagramPage() {
+  const items: InstagramItem[] = [
+    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+    { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+    { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+  ];
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -87,4 +78,3 @@ export default async function InstagramPage() {
     </div>
   );
 }
-
