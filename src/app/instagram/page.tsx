@@ -6,6 +6,7 @@ import Image from 'next/image';
 import InstagramPostEmbed from '@/components/InstagramPostEmbed';
 import InstagramReelEmbed from '@/components/InstagramReelEmbed';
 import {runInstagramScraper} from '@/services/instagram';
+import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 
 interface InstagramItem {
   type: 'reel' | 'post';
@@ -14,20 +15,22 @@ interface InstagramItem {
 
 export default function InstagramPage() {
   const [items, setItems] = useState<InstagramItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadInstagramFeed() {
+      setIsLoading(true);
+      setError(null);
       try {
-        const feed = await runInstagramScraper();
-        if (feed && feed.length > 0) {
-          setItems(feed);
+        const scrapedItems = await runInstagramScraper();
+        if (scrapedItems && scrapedItems.length > 0) {
+          setItems(scrapedItems);
+          console.log('Items length', scrapedItems.length);
         } else {
-          console.error("Failed to load Instagram feed: runInstagramScraper returned undefined or null");
+          console.warn("No Instagram posts found, using fallback items.");
+          // Fallback data
           const fallbackItems: InstagramItem[] = [
-            { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-            { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-            { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-            { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
             { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
             { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
             { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
@@ -35,19 +38,19 @@ export default function InstagramPage() {
           ];
           setItems(fallbackItems);
         }
-      } catch (error) {
-        console.error("Error loading Instagram feed:", error);
+      } catch (e: any) {
+        console.error("Failed to load Instagram feed:", e);
+        setError("Failed to load Instagram feed.");
+        // Fallback data in case of error
         const fallbackItems: InstagramItem[] = [
-          { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-          { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-          { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-          { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
           { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
           { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
           { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
           { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
         ];
         setItems(fallbackItems);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -65,19 +68,34 @@ export default function InstagramPage() {
       />
       <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0 rounded-md"></div>
       <div className="container mx-auto py-10 px-4">
-        <div className="relative bg-transparent z-10 border-none shadow-none">
-          <div>
-            <div className="text-3xl md:text-5xl font-bold text-foreground flex items-center justify-center">
+        <Card className="relative bg-transparent z-10 border-none shadow-none">
+          <CardHeader>
+            <CardTitle className="text-3xl md:text-5xl font-bold text-foreground flex items-center justify-center">
               Instagram Feed
-            </div>
-            <div className="text-muted-foreground text-center">
+            </CardTitle>
+            <CardDescription className="text-muted-foreground text-center">
               Check out our latest posts on Instagram.
-            </div>
-          </div>
-          <div>
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
             <section className="mb-8">
+              {isLoading && <p>Loading Instagram feed...</p>}
+              {error && (
+                <p>
+                  {error} Please check our{' '}
+                  <Link
+                    href="https://www.instagram.com/galwaydodgeball"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"
+                  >
+                    Instagram page
+                  </Link>{' '}
+                  for more details.
+                </p>
+              )}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {items && items.length > 0 ? (
+                {items && items.length > 0 &&
                   items.map((item, index) => (
                     <div key={index}>
                       {item.type === 'reel' ? (
@@ -86,25 +104,11 @@ export default function InstagramPage() {
                         <InstagramPostEmbed permalink={item.href} />
                       )}
                     </div>
-                  ))
-                ) : (
-                  <div>
-                    Failed to load Instagram feed. Please check our{' '}
-                    <Link
-                      href="https://www.instagram.com/galwaydodgeball"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"
-                    >
-                      Instagram page
-                    </Link>{' '}
-                    for more details.
-                  </div>
-                )}
+                  ))}
               </div>
             </section>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
