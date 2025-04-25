@@ -1,6 +1,11 @@
 /**
  * Represents a Meetup event.
  */
+import { getCachedData, setCachedData } from './redis';
+
+const MEETUP_CACHE_KEY = 'meetup_events';
+const CACHE_EXPIRY_SECONDS = 3600; // 1 hour
+
 export interface MeetupEvent {
   /**
    * The ID of the event.
@@ -30,6 +35,11 @@ export interface MeetupEvent {
  * @returns A promise that resolves to an array of MeetupEvent objects.
  */
 export async function getUpcomingEvents(): Promise<MeetupEvent[]> {
+    const cachedData = await getCachedData(MEETUP_CACHE_KEY);
+    if (cachedData) {
+      console.log('Using cached Meetup data');
+      return JSON.parse(cachedData);
+    }
   const apiKey = process.env.MEETUP_API_KEY;
   const groupId = process.env.MEETUP_GROUP_ID;
 
@@ -96,7 +106,7 @@ export async function getUpcomingEvents(): Promise<MeetupEvent[]> {
           time: new Date(event.node.dateTime).toLocaleString(), // Format the date and time
         };
       });
-
+        await setCachedData(MEETUP_CACHE_KEY, JSON.stringify(events), CACHE_EXPIRY_SECONDS);
       return events;
     } catch (jsonError) {
       console.error("Error parsing JSON response from Meetup API:", jsonError);

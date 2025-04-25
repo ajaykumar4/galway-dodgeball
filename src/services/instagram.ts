@@ -2,13 +2,23 @@
 
 import puppeteer from 'puppeteer-core';
 import * as chromium from '@sparticuz/chromium';
+import {getCachedData, setCachedData} from '@/services/redis';
 
 export interface InstagramPost {
   type: 'reel' | 'post';
   href: string;
 }
 
+const INSTAGRAM_CACHE_KEY = 'instagram_feed';
+const CACHE_EXPIRY_SECONDS = 3600; // 1 hour
+
 export async function runInstagramScraper(): Promise<InstagramPost[]> {
+  const cachedData = await getCachedData(INSTAGRAM_CACHE_KEY);
+  if (cachedData) {
+    console.log('Using cached Instagram data');
+    return JSON.parse(cachedData);
+  }
+
   const url = 'https://www.instagram.com/galwaydodgeball/';
   let browser: puppeteer.Browser | null = null;
 
@@ -28,8 +38,8 @@ export async function runInstagramScraper(): Promise<InstagramPost[]> {
 
     await page.goto(url, {waitUntil: 'networkidle2'});
 
-    // Wait for 5 seconds after the page has loaded
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    // Wait for the articles to load (you might need to adjust the selector and waiting time)
+    await page.waitForSelector('article');
 
     // Extract all article elements from the page
     const articles = await page.$$('article');
@@ -62,10 +72,11 @@ export async function runInstagramScraper(): Promise<InstagramPost[]> {
         }
       }
     }
+   await setCachedData(INSTAGRAM_CACHE_KEY, JSON.stringify(posts), CACHE_EXPIRY_SECONDS);
     console.log('posts', posts);
     return posts;
   } catch (error: any) {
-    console.error('Error during scraping:', error);
+    console.error('Error during scraping:', error.message);
     return [] ;
   } finally {
     if (browser) {
