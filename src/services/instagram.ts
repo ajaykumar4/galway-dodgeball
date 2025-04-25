@@ -9,3 +9,4 @@ export async function runInstagramScraper(): Promise<InstagramPost[]> {
   console.log('runInstagramScraper called, but scraping is now done in a separate application.');
   return [];
 }
+

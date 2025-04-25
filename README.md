@@ -127,7 +127,7 @@ async function scrapeInstagram() {
     await page.waitForSelector('article');
 
     // Extract all article elements from the page
-    const articles = await page.$$('article');
+    const articles = await browser.newPage.$$('article');
 
     const posts = [];
     
@@ -139,7 +139,8 @@ async function scrapeInstagram() {
           .map(element => {
             const img = element.querySelector('img');
             return {
-              href: element.href
+              href: element.href,
+              alt: img ? img.alt : '', // Get the alt text from the <img> tag
             };
           });
       });
