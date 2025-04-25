@@ -28,6 +28,7 @@ export async function runInstagramScraper(): Promise<InstagramPost[]> {
 
     await page.goto(url, {waitUntil: 'networkidle2'});
 
+    // Wait for 5 seconds after the page has loaded
     await new Promise(resolve => setTimeout(resolve, 5000));
 
     // Extract all article elements from the page
@@ -64,7 +65,7 @@ export async function runInstagramScraper(): Promise<InstagramPost[]> {
     console.log('posts', posts);
     return posts;
   } catch (error: any) {
-    console.error('Error during scraping:', error.message);
+    console.error('Error during scraping:', error);
     return [] ;
   } finally {
     if (browser) {
