@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import InstagramPostEmbed from '@/components/InstagramPostEmbed';
@@ -12,47 +12,38 @@ interface InstagramItem {
   href: string;
 }
 
-export default function InstagramPage() {
-  const [items, setItems] = useState<InstagramItem[]>([]);
-
-  useEffect(() => {
-    async function loadInstagramFeed() {
-      try {
-        const feed = await runInstagramScraper();
-        if (feed && feed.length > 0) {
-          setItems(feed);
-        } else {
-          console.error("Failed to load Instagram feed: runInstagramScraper returned undefined or null");
-          const fallbackItems: InstagramItem[] = [
-            { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-            { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-            { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-            { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-            { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-            { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-            { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-            { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-          ];
-          setItems(fallbackItems);
-        }
-      } catch (error) {
-        console.error("Error loading Instagram feed:", error);
-        const fallbackItems: InstagramItem[] = [
-          { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-          { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-          { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-          { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-          { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-          { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-          { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
-          { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
-        ];
-        setItems(fallbackItems);
-      }
+export default async function InstagramPage() {
+  let items: InstagramItem[] = [];
+  try {
+    const feed = await runInstagramScraper();
+    if (feed && feed.length > 0) {
+      items = feed;
+    } else {
+      console.error("Failed to load Instagram feed: runInstagramScraper returned undefined or null");
+      items = [
+        { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+        { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+        { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+        { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+        { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+        { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+        { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+        { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+      ];
     }
-
-    loadInstagramFeed();
-  }, []);
+  } catch (error) {
+    console.error("Error loading Instagram feed:", error);
+    items = [
+      { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+      { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+      { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+      { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+      { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+      { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+      { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+      { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+    ];
+  }
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -109,4 +100,3 @@ export default function InstagramPage() {
     </div>
   );
 }
-
