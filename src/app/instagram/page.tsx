@@ -12,12 +12,47 @@ interface InstagramItem {
   href: string;
 }
 
-export default async function InstagramPage() {
+export default function InstagramPage() {
   const [items, setItems] = useState<InstagramItem[]>([]);
-  const scrapedItems = await runInstagramScraper();
+
   useEffect(() => {
-    setItems(scrapedItems);
-  }, [scrapedItems]);
+    async function loadInstagramFeed() {
+      try {
+        const feed = await runInstagramScraper();
+        if (feed && feed.length > 0) {
+          setItems(feed);
+        } else {
+          console.error("Failed to load Instagram feed: runInstagramScraper returned undefined or null");
+          const fallbackItems: InstagramItem[] = [
+            { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+            { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+            { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+            { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+            { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+            { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+            { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+            { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+          ];
+          setItems(fallbackItems);
+        }
+      } catch (error) {
+        console.error("Error loading Instagram feed:", error);
+        const fallbackItems: InstagramItem[] = [
+          { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+          { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+          { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+          { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+          { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+          { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+          { type: 'reel', href: "https://www.instagram.com/reel/C_d5wf3gHai/" },
+          { type: 'post', href: "https://www.instagram.com/p/DGI3MrDs3Xc/" },
+        ];
+        setItems(fallbackItems);
+      }
+    }
+
+    loadInstagramFeed();
+  }, []);
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
