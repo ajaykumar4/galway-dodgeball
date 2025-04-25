@@ -1,7 +1,7 @@
 'use server';
 
 import puppeteer from 'puppeteer-core';
-import * as chromium from '@sparticuz/chromium'
+import * as chromium from '@sparticuz/chromium';
 
 export interface InstagramPost {
   type: 'reel' | 'post';
