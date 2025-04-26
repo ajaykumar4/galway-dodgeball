@@ -5,7 +5,11 @@ dev:
 	npm run dev
 
 up:
-	podman-compose --env-file web_scraper/.env up -d 
+	podman compose --env-file web_scraper/.env up -d 
+
+scraper-deps:
+	cd web_scraper && go mod tidy
+	cd web_scraper && go mod download
 
 build:
 	npm run build
@@ -23,7 +27,7 @@ scraper-run:
 scraper-run-docker: scraper-build-docker
 	podman run --network=host scraper-image
 
-scraper: scraper-build scraper-run
+scraper: scraper-deps scraper-build scraper-run
 
 scraper-docker: scraper-build-docker scraper-run-docker
 
