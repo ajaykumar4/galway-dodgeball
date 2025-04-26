@@ -1,18 +1,17 @@
-# Use official Go 1.22 image
-FROM golang:1.22
+# Use official Go 1.22 image as builder
+FROM golang:1.22 as builder
 
+# Set working directory
 WORKDIR /app
 
-# Copy go.mod and go.sum first for caching
+# Copy go.mod and go.sum first to cache dependencies
 COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 
-# Copy the rest of the app
+# Copy the rest of the application code
 COPY . .
 
-# Build binary
-RUN go build -o scraper . 
+# Build the binary
+RUN CGO_ENABLED=0 go build -o scraper .
 
-# Run the scraper
-CMD ["./scraper"]
