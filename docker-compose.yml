@@ -16,6 +16,8 @@ services:
     depends_on:
       - redis
     environment:
+      - PROXY_USERNAME=${PROXY_USERNAME}
+      - PROXY_PASSWORD=${PROXY_PASSWORD}
       - REDIS_ADDR=redis:6379
     volumes:
       - ./web_scraper:/app

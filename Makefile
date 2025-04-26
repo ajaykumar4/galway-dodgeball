@@ -5,7 +5,7 @@ dev:
 	npm run dev
 
 up:
-	podman-compose up -d 
+	podman-compose --env-file web_scraper/.env up -d 
 
 build:
 	npm run build
