@@ -14,7 +14,6 @@ type Event = {
 export default async function EventsPage() {
   // Static fallback data or message since Redis/Meetup fetching is removed
   const events: Event[] = []; // Keep empty or add static example events if desired
-  const error = true; // Simulate an error state as data source is removed
 
 
   return (
@@ -23,9 +22,10 @@ export default async function EventsPage() {
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
         fill
-        className="absolute -z-10 rounded-md object-cover"
+        className="absolute -z-10 object-cover"
+        data-ai-hint="dodgeball tournament"
       />
-      <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0 rounded-md"></div>
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0 "></div>
       <div className="container mx-auto py-10 px-4">
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
@@ -34,8 +34,8 @@ export default async function EventsPage() {
           </CardHeader>
           <CardContent>
             {/* Display a message indicating where to find events */}
-            <div>
-              To see our upcoming events, please check our official{' '}
+            <div className="text-center">
+              Failed to load upcoming events. Please check our{' '}
               <Link
                 href="https://www.meetup.com/galway-dodgeball-club"
                 target="_blank"
@@ -43,8 +43,8 @@ export default async function EventsPage() {
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-2 py-1 transition-colors inline-block"
               >
                 Meetup page
-              </Link>
-              .
+              </Link>{' '}
+              for more details.
             </div>
             {/* Optional: Keep the fallback rendering logic if you prefer */}
             {/*
@@ -68,7 +68,7 @@ export default async function EventsPage() {
                 ))}
               </div>
             ) : (
-              <div>
+              <div className="text-center">
                 Failed to load upcoming events. Please check our{' '}
                 <Link
                   href="https://www.meetup.com/galway-dodgeball-club"

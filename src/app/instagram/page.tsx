@@ -19,9 +19,10 @@ export default function InstagramPage() {
         alt="Dodgeball Background"
         layout="fill" // Use layout="fill" for Next.js 13+ Image component
         objectFit="cover" // Ensure the image covers the container
-        className="absolute top-0 left-0 w-full h-full -z-10 rounded-md"
+        className="absolute top-0 left-0 w-full h-full -z-10 "
+        data-ai-hint="social media feed"
       />
-      <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0 rounded-md"></div>
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0 "></div>
       <div className="container mx-auto py-10 px-4">
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
