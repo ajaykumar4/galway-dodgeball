@@ -1,113 +1,72 @@
 # Galway Dodgeball Hub
 
-This is a NextJS starter project for the Galway Dodgeball Hub.
+This is the Next.js application for the Galway Dodgeball website.
 
-This project is split into two separate applications:
-
-*   **Website (this directory):** A Next.js application for the Galway Dodgeball website. It fetches data from a Redis database populated by the web scraper.
-*   **Web Scraper (`web_scraper` directory):** A Go application that scrapes data from Instagram and Meetup, and stores it in a Redis database.
-
-## Website (This Directory)
-
-This is the Next.js application that serves the user-facing website.
-
-### Prerequisites
+## Prerequisites
 
 *   Node.js and npm installed
-*   A running Redis instance (can be local or remote) - *Note: The web scraper populates Redis.*
 
-### Installation
+## Installation
 
 1.  Clone the repository (if you haven't already).
 2.  Navigate to the root directory of the project (where this README is located).
-3.  Run `npm install` to install dependencies for the website.
+3.  Run `npm install` to install dependencies.
 
-### Configuration
+## Configuration
 
 1.  Create a `.env` file in the root directory (this directory).
-2.  Add the following environment variable, pointing to your Redis instance:
-
-    ```
-    REDIS_URL=redis://your_redis_host:6379
-    ```
-    Replace `your_redis_host:6379` with the actual host and port of your Redis server (e.g., `localhost:6379` if running locally, or `redis:6379` if using Docker Compose).
-3.  Make sure the `NEXT_PUBLIC_PORT` variable is also set if you need to run on a specific port (default is 9002 in the Docker setup).
+2.  If you need to run on a specific port (other than the default 3000), add the `NEXT_PUBLIC_PORT` variable:
 
     ```
     NEXT_PUBLIC_PORT=9002
     ```
 
-### Running the Website (Development)
+## Running the Website (Development)
 
 1.  **Start the development server:**
     ```bash
     npm run dev
     ```
-    This command starts the Next.js development server, typically on port 9002 (or the port specified in `.env`).
-2.  Open your browser and navigate to `http://localhost:9002`.
+    This command starts the Next.js development server, typically on port 3000 (or the port specified in `.env` or the `dev` script in `package.json`).
+2.  Open your browser and navigate to `http://localhost:PORT` (replace PORT with the actual port number, e.g., 3000 or 9002).
 
-### Building the Website (Production)
+## Building the Website (Production)
 
 1.  Run `npm run build` to create a production build.
-2.  Run `npm start` to start the production server (ensure `REDIS_URL` is set in the production environment).
+2.  Run `npm start` to start the production server (ensure `NEXT_PUBLIC_PORT` is set in the production environment if needed).
 
-## Web Scraper (Go Application in `web_scraper` directory)
+## Running with Docker
 
-The web scraper is a separate Go application responsible for fetching data from Instagram and Meetup and storing it in the Redis database that the website uses.
-
-### Prerequisites
-
-*   Go installed (check `go.mod` for version)
-*   A running Redis instance
-
-### Installation & Running
-
-Refer to the instructions within the `web_scraper` directory (if any specific setup is needed). Generally:
-
-1.  Navigate to the `web_scraper` directory.
-2.  Run `go build -o scraper .` to build the executable.
-3.  Configure necessary environment variables (e.g., `REDIS_ADDR`, `PROXY_USERNAME`, `PROXY_PASSWORD`). You might use a `.env` file within the `web_scraper` directory or set them directly.
-4.  Run `./scraper` to start the scraper.
-
-## Running Both Applications Together (Using Docker Compose)
-
-Docker and Docker Compose are the recommended way to run both the website and the scraper (along with Redis) in isolated containers.
+Docker can be used to run the website in an isolated container.
 
 ### Prerequisites
 
-*   Docker and Docker Compose installed
+*   Docker installed
 
 ### Configuration
 
-1.  Ensure you have a `.env` file in the root directory with `REDIS_URL=redis://redis:6379` and `NEXT_PUBLIC_PORT=9002` (or your desired port).
-2.  Configure any necessary environment variables for the scraper (like proxy credentials) within the `docker-compose.yml` file under the `webscraper` service's `environment` section, or create a separate `.env` file in the `web_scraper` directory and reference it using `env_file` in `docker-compose.yml`.
+1.  Ensure you have a `.env` file in the root directory if you need to specify `NEXT_PUBLIC_PORT`.
+2.  The `docker-compose.yml` file is configured to build and run the `ui` service (the Next.js app).
 
 ### Running with Docker Compose
 
-1.  **Build and start the services:** From the **root directory** of the project (where this README and `docker-compose.yml` are located), run:
+1.  **Build and start the service:** From the **root directory**, run:
     ```bash
     docker-compose up --build -d
     ```
-    *   `--build`: Forces Docker to rebuild the images based on the Dockerfiles. Use this the first time or when you change dependencies/code.
-    *   `-d`: Runs the containers in detached mode (in the background).
-2.  The website should be accessible at `http://localhost:9002` (or the port you configured). The scraper will run in the background.
+    *   `--build`: Forces Docker to rebuild the image. Use this the first time or when you change dependencies/code.
+    *   `-d`: Runs the container in detached mode.
+2.  The website should be accessible at `http://localhost:PORT` (the port you configured or the default 3000).
 3.  **To view logs:**
     ```bash
-    docker-compose logs -f ui # View website logs
-    docker-compose logs -f webscraper # View scraper logs
+    docker-compose logs -f ui
     ```
-4.  **To stop the services:**
+4.  **To stop the service:**
     ```bash
     docker-compose down
     ```
 
-**Note:** The provided `docker-compose.yml` uses `Dockerfile` for the website and `web_scraper/Dockerfile` for the Go scraper. Ensure these Dockerfiles correctly build their respective applications.
-
-## Deployment
-
-### Netlify (Website Only)
-
-This section assumes you only want to deploy the Next.js website part to Netlify. The web scraper and Redis would need to be hosted elsewhere.
+## Deployment (Netlify)
 
 1.  **Connect your Git repository** to Netlify.
 2.  **Configure Build Settings:**
@@ -117,10 +76,5 @@ This section assumes you only want to deploy the Next.js website part to Netlify
         *   **Publish directory:** `.next`
     *   The `netlify.toml` file in the root directory provides these settings.
 3.  **Environment Variables:**
-    *   In the Netlify UI (Site settings > Build & deploy > Environment), add the `REDIS_URL` environment variable, pointing to your *hosted* Redis instance. **Do not commit sensitive credentials directly into your code or `.env` file.**
+    *   In the Netlify UI (Site settings > Build & deploy > Environment), add any necessary environment variables (e.g., `NEXT_PUBLIC_PORT` if you need to override the default).
 4.  **Deploy:** Trigger a deploy manually or push to your connected Git branch.
-
-**Important Considerations for Netlify:**
-
-*   **Web Scraper:** Netlify is primarily for hosting static sites and frontend applications. The Go web scraper cannot be run directly on Netlify's build/deploy infrastructure long-term. You'll need to host the scraper and Redis separately (e.g., on a VPS, cloud service like Fly.io, Render, or using Docker on a server).
-*   **Redis:** Netlify does not provide a built-in Redis service. You will need to use an external Redis provider (like Redis Cloud, Upstash, Aiven, etc.) and configure the `REDIS_URL` environment variable in Netlify accordingly.

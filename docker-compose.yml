@@ -1,39 +1,16 @@
 version: '3.8'
 
 services:
-  redis:
-    image: redis:7
-    ports:
-      - "6379:6379"
-    volumes:
-      - redisdata:/data
-    restart: unless-stopped
-
-  webscraper:
-    build:
-      context: ./web_scraper
-      dockerfile: Dockerfile
-    depends_on:
-      - redis
-    environment:
-      - PROXY_USERNAME=${PROXY_USERNAME}
-      - PROXY_PASSWORD=${PROXY_PASSWORD}
-      - REDIS_ADDR=redis:6379
-    volumes:
-      - ./web_scraper:/app
-    restart: unless-stopped
-    
   ui:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
-    depends_on:
-      - redis
-    environment:
-      - REDIS_URL=redis://redis:6379
+      # Use the default Next.js port 3000 if NEXT_PUBLIC_PORT is not set
+      - "${NEXT_PUBLIC_PORT:-3000}:3000"
+    # Removed depends_on: - redis
+    # Removed environment: - REDIS_URL=redis://redis:6379
     restart: unless-stopped
 
-volumes:
-  redisdata: # Define the named volume for Redis persistence
+# Removed redis and webscraper services
+# Removed volumes definition as it's no longer needed for redis
