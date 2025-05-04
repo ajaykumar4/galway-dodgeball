@@ -22,9 +22,9 @@ export default function AboutPage() {
       imageUrl: '/committee/katie.jpg', 
     },
     {
-      name: 'Alan De Grás',
+      name: 'Alan Grace',
       role: 'P.R.O.',
-      imageUrl: '/committee/alan-degras.jpg', 
+      imageUrl: '/committee/alan-grace.jpg', 
     },
     {
       name: 'Alex Potter',
