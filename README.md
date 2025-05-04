@@ -14,7 +14,7 @@ This is the Next.js application that serves the user-facing website.
 ### Prerequisites
 
 *   Node.js and npm installed
-*   A running Redis instance (can be local or remote)
+*   A running Redis instance (can be local or remote) - *Note: The web scraper populates Redis.*
 
 ### Installation
 
@@ -80,7 +80,7 @@ Docker and Docker Compose are the recommended way to run both the website and th
 ### Configuration
 
 1.  Ensure you have a `.env` file in the root directory with `REDIS_URL=redis://redis:6379` and `NEXT_PUBLIC_PORT=9002` (or your desired port).
-2.  Configure any necessary environment variables for the scraper (like proxy credentials) within the `docker-compose.yml` file under the `scraper` service's `environment` section, or create a separate `.env` file in the `web_scraper` directory and reference it using `env_file` in `docker-compose.yml`.
+2.  Configure any necessary environment variables for the scraper (like proxy credentials) within the `docker-compose.yml` file under the `webscraper` service's `environment` section, or create a separate `.env` file in the `web_scraper` directory and reference it using `env_file` in `docker-compose.yml`.
 
 ### Running with Docker Compose
 
@@ -90,15 +90,37 @@ Docker and Docker Compose are the recommended way to run both the website and th
     ```
     *   `--build`: Forces Docker to rebuild the images based on the Dockerfiles. Use this the first time or when you change dependencies/code.
     *   `-d`: Runs the containers in detached mode (in the background).
-2.  The website should be accessible at `http://localhost:9002` (or the port you configured). The scraper will run in the background according to its schedule (defined in its Go code).
+2.  The website should be accessible at `http://localhost:9002` (or the port you configured). The scraper will run in the background.
 3.  **To view logs:**
     ```bash
-    docker-compose logs -f website # View website logs
-    docker-compose logs -f scraper # View scraper logs
+    docker-compose logs -f ui # View website logs
+    docker-compose logs -f webscraper # View scraper logs
     ```
 4.  **To stop the services:**
     ```bash
     docker-compose down
     ```
 
-**Note:** The provided `docker-compose.yml` uses `Dockerfile` for the website and `web_scraper/Dockerfile-scraper` for the Go scraper. Ensure these Dockerfiles correctly build their respective applications.
+**Note:** The provided `docker-compose.yml` uses `Dockerfile` for the website and `web_scraper/Dockerfile` for the Go scraper. Ensure these Dockerfiles correctly build their respective applications.
+
+## Deployment
+
+### Netlify (Website Only)
+
+This section assumes you only want to deploy the Next.js website part to Netlify. The web scraper and Redis would need to be hosted elsewhere.
+
+1.  **Connect your Git repository** to Netlify.
+2.  **Configure Build Settings:**
+    *   Netlify should automatically detect it's a Next.js project using the `@netlify/plugin-nextjs`.
+    *   If manual configuration is needed, or to verify, use:
+        *   **Build command:** `npm run build`
+        *   **Publish directory:** `.next`
+    *   The `netlify.toml` file in the root directory provides these settings.
+3.  **Environment Variables:**
+    *   In the Netlify UI (Site settings > Build & deploy > Environment), add the `REDIS_URL` environment variable, pointing to your *hosted* Redis instance. **Do not commit sensitive credentials directly into your code or `.env` file.**
+4.  **Deploy:** Trigger a deploy manually or push to your connected Git branch.
+
+**Important Considerations for Netlify:**
+
+*   **Web Scraper:** Netlify is primarily for hosting static sites and frontend applications. The Go web scraper cannot be run directly on Netlify's build/deploy infrastructure long-term. You'll need to host the scraper and Redis separately (e.g., on a VPS, cloud service like Fly.io, Render, or using Docker on a server).
+*   **Redis:** Netlify does not provide a built-in Redis service. You will need to use an external Redis provider (like Redis Cloud, Upstash, Aiven, etc.) and configure the `REDIS_URL` environment variable in Netlify accordingly.

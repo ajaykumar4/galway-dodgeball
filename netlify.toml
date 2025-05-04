@@ -1,0 +1,16 @@
+# netlify.toml
+
+# Build settings for Netlify
+[build]
+  # Command to build the Next.js site
+  command = "npm run build"
+  # Directory containing the built site (default for Next.js)
+  publish = ".next"
+  # Specify the Node.js version (optional, but recommended)
+  # Check Netlify's supported versions if needed
+  environment = { NODE_VERSION = "20" }
+
+# Optional: Plugin for Next.js on Netlify for optimal performance
+# This enables features like ISR, Image Optimization, etc.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
