@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Galway Dodgeball', // Updated title
-  description: 'Your hub for all things Galway Dodgeball!',
+  description: 'Galway Dodgeball',
   icons: {
     icon: '/galway-dodgeball-logo.png', // Updated favicon path
   },
