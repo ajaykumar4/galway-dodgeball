@@ -21,7 +21,6 @@ export default function Navbar() {
             height={40}
             alt="Galway Dodgeball Logo"
             className="mr-2 rounded-full"
-            style={{ height: '40px', width: 'auto' }} // Maintain aspect ratio
             priority // Load logo quickly
           />
           Galway Dodgeball
