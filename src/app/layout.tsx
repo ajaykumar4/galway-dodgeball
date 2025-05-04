@@ -15,8 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Galway Dodgeball Hub',
+  title: 'Galway Dodgeball', // Updated title
   description: 'Your hub for all things Galway Dodgeball!',
+  icons: {
+    icon: '/galway-dodgeball-logo.png', // Updated favicon path
+  },
 };
 
 export default function RootLayout({
