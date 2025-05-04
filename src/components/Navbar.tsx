@@ -21,6 +21,8 @@ export default function Navbar() {
             height={40}
             alt="Galway Dodgeball Logo"
             className="mr-2 rounded-full"
+            style={{ height: '40px', width: 'auto' }} // Maintain aspect ratio
+            priority // Load logo quickly
           />
           Galway Dodgeball
         </Link>
@@ -48,10 +50,12 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-6 items-center flex-wrap">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-          <Link href="/the-game" className="hover:text-primary transition-colors">The Game</Link>
-          <Link href="/about" className="hover:text-primary transition-colors">About</Link>
-          <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
+          <ul className="flex space-x-6 items-center"> {/* Changed div to ul */}
+              <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
+              <li><Link href="/the-game" className="hover:text-primary transition-colors">The Game</Link></li>
+              <li><Link href="/about" className="hover:text-primary transition-colors">About</Link></li>
+              <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+          </ul>
           <DarkThemeToggle />
         </div>
       </div>

@@ -19,13 +19,14 @@ export default function Home() {
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
         fill={true}
+        priority // Add priority for LCP
         className="absolute top-0 left-0 w-full h-full -z-10 object-cover"
         data-ai-hint="dodgeball court"
       />
       <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0  "></div>
       <div className="container mx-auto py-10 px-4">
         <Card className="relative bg-transparent z-10 border-none shadow-none">
-          <CardHeader>
+          <CardHeader className="items-center">
             <CardTitle className="text-3xl md:text-5xl font-bold text-foreground flex items-center justify-center">
               Welcome to Galway Dodgeball!
             </CardTitle>
@@ -82,7 +83,7 @@ export default function Home() {
                 Meetup
               </a>
             </div>
-            <p className="text-center">
+            <p className="mt-4 text-center"> {/* Added margin-top */}
               Come join the fun &mdash; we&apos;d love to meet you!
             </p>
           </CardContent>

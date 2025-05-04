@@ -49,6 +49,7 @@ export default function AboutPage() {
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
         fill={true}
+        priority // Add priority for LCP
         className="absolute top-0 left-0 w-full h-full -z-10 object-cover"
         data-ai-hint="dodgeball action"
       />
