@@ -18,9 +18,9 @@ export default function Home() {
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
-        layout="fill"
-        objectFit="cover"
-        className="absolute top-0 left-0 w-full h-full -z-10 "
+        fill={true}
+        className="absolute top-0 left-0 w-full h-full -z-10 object-cover"
+        data-ai-hint="dodgeball court"
       />
       <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0  "></div>
       <div className="container mx-auto py-10 px-4">
@@ -91,4 +91,3 @@ export default function Home() {
     </div>
   );
 }
-

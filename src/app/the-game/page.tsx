@@ -9,9 +9,9 @@ export default function TheGamePage() {
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
-        layout="fill"
-        objectFit="cover"
-        className="absolute top-0 left-0 w-full h-full -z-10 "
+        fill={true}
+        className="absolute top-0 left-0 w-full h-full -z-10 object-cover"
+        data-ai-hint="dodgeball court rules"
       />
       <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0  "></div>
       <div className="container mx-auto py-10 px-4">
@@ -48,34 +48,34 @@ export default function TheGamePage() {
               <p className="mb-4">
                 Please click on the logos below to view and/or download a full set of EDF or WDBF rules.
               </p>
-              <div className="flex items-center space-x-4 flex-wrap">
+              <div className="flex items-center justify-center space-x-4 flex-wrap gap-y-4">
                 <a
-                  href="https://www.dodgeballeurope.org/wp-content/uploads/2024/03/EDF-Rules-and-regulations-6.1.pdf"
+                  href="https://drive.google.com/file/d/1_lFtJZaN-W5XgNO8boK8ne1aJaQuT1kw/view?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-75 transition-opacity flex flex-col items-center"
                 >
-                  <img
+                  <Image
                     src="https://www.dodgeballeurope.org/wp-content/uploads/2018/03/2-EDF-logo-horizontal.png"
                     alt="European Dodgeball Federation Rules"
-                    width={200}
-                    height={200}
-                    className="rounded-md"
+                    width={150} // Adjusted width
+                    height={40}  // Adjusted height to maintain aspect ratio
+                    className="rounded-md object-contain" // Use object-contain to prevent distortion
                   />
                   <span className="ml-2">EDF Rules</span>
                 </a>
                 <a
-                  href="https://worlddodgeballfederation.com/wdbf-content/uploads/2024/03/WDBF-Dodgeball-Rules-2024.pdf"
+                  href="https://drive.google.com/file/d/1nkOw6O2DDwgw8CnHIqi7_0c_H_8lgx0z/view?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-75 transition-opacity flex flex-col items-center"
                   >
-                  <img
+                  <Image
                     src="https://worlddodgeballfederation.com/wdbf-content/uploads/2020/02/WDBF-Colour-Emblem-Updated-Logo.png"
                     alt="World Dodgeball Federation Rules"
-                    width={200}
-                    height={200}
-                    className="rounded-md"
+                    width={150} // Adjusted width
+                    height={40}  // Adjusted height to maintain aspect ratio
+                    className="rounded-md object-contain" // Use object-contain to prevent distortion
                   />
                   <span className="ml-2">WDBF Rules</span>
                 </a>

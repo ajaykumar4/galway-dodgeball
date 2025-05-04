@@ -16,9 +16,8 @@ export default function ContactPage() {
       <Image
         src="https://picsum.photos/1920/1080"
         alt="Dodgeball Background"
-        layout="fill"
-        objectFit="cover"
-        className="absolute top-0 left-0 w-full h-full -z-10"
+        fill={true}
+        className="absolute top-0 left-0 w-full h-full -z-10 object-cover"
         data-ai-hint="dodgeball game"
       />
       <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0"></div>
