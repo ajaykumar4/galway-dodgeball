@@ -16,6 +16,20 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+       {
+        protocol: 'https',
+        hostname: 'www.dodgeballeurope.org',
+        port: '',
+        pathname: '/wp-content/uploads/**',
+      },
+       {
+        protocol: 'https',
+        hostname: 'worlddodgeballfederation.com', // Corrected hostname
+        port: '',
+        pathname: '/wdbf-content/uploads/**', // Corrected path prefix
+      },
+
+
     ],
   },
 };

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Image from 'next/image';
 import { useState } from 'react';
 import { Menu } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"; // Added SheetTitle
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,16 +33,15 @@ export default function Navbar() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full sm:w-64 max-w-sm">
-              <div className="grid gap-4 py-4">
-                <Link href="/" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>Home</Link>
-                <Link href="/the-game" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>The Game</Link>
-                <Link href="/events" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>Events</Link>
-                <Link href="/instagram" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>Instagram</Link>
-                <Link href="/about" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>About</Link>
-                <Link href="/contact" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>Contact</Link>
-                <DarkThemeToggle />
-              </div>
+            <SheetContent side="right" className="w-full sm:w-64 max-w-sm bg-background/80 backdrop-blur-md">
+             <SheetTitle className="hidden">Mobile Navigation Menu</SheetTitle> {/* Added SheetTitle for accessibility */}
+              <ul className="grid gap-4 py-4">
+                <li><Link href="/" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+                <li><Link href="/the-game" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>The Game</Link></li>
+                <li><Link href="/about" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>About</Link></li>
+                <li><Link href="/contact" className="hover:text-primary transition-colors block" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
+                <li><DarkThemeToggle /></li>
+              </ul>
             </SheetContent>
           </Sheet>
         </div>
@@ -51,8 +50,6 @@ export default function Navbar() {
         <div className="hidden lg:flex space-x-6 items-center flex-wrap">
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>
           <Link href="/the-game" className="hover:text-primary transition-colors">The Game</Link>
-          <Link href="/events" className="hover:text-primary transition-colors">Events</Link>
-          <Link href="/instagram" className="hover:text-primary transition-colors">Instagram</Link>
           <Link href="/about" className="hover:text-primary transition-colors">About</Link>
           <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
           <DarkThemeToggle />
@@ -61,4 +58,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
