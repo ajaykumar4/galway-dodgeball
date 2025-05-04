@@ -1,3 +1,4 @@
+
 "use client"
 
 // Inspired by react-hot-toast library
@@ -191,4 +192,6 @@ function useToast() {
   }
 }
 
-export { useToast, toast }
+// Export only useToast, as toast function is implicitly used by useToast
+export { useToast }
+
