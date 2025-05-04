@@ -1,7 +1,7 @@
 'use client';
 
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
-import {MapPin, Clock} from 'lucide-react';
+import {MapPin, Clock, Mail} from 'lucide-react';
 import Image from 'next/image';
 
 export default function ContactPage() {
@@ -9,6 +9,7 @@ export default function ContactPage() {
   // Correctly encode the address for the Google Maps URL
   const encodedAddress = encodeURIComponent(address);
   const mapsUrl = `https://maps.google.com/maps?q=${encodedAddress}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+  const emailAddress = 'galwaydodgeball@gmail.com'; // Replace with actual email if different
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -18,13 +19,14 @@ export default function ContactPage() {
         layout="fill"
         objectFit="cover"
         className="absolute top-0 left-0 w-full h-full -z-10"
+        data-ai-hint="dodgeball game"
       />
       <div className="absolute inset-0 bg-background/60 backdrop-blur-md z-0"></div>
       <div className="container mx-auto py-10 px-4">
         <Card className="relative bg-transparent z-10 border-none shadow-none">
           <CardHeader>
             <CardTitle className="text-3xl md:text-5xl font-bold text-foreground flex items-center justify-center">Contact Us</CardTitle>
-            <CardDescription className="text-muted-foreground text-center">Get in touch or join our community.</CardDescription>
+            <CardDescription className="text-muted-foreground text-center">Get in touch or find our location.</CardDescription>
           </CardHeader>
           <CardContent>
             <section className="mb-6">
@@ -32,7 +34,7 @@ export default function ContactPage() {
                 <MapPin className="h-5 w-5" /> <span>Address</span>
               </h2>
               <p>{address}</p>
-              <div className="mt-4">
+              <div className="mt-4 rounded-md overflow-hidden shadow-md">
                 <iframe
                   src={mapsUrl}
                   width="100%"
@@ -54,17 +56,17 @@ export default function ContactPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-2">Join Our Community</h2>
+              <h2 className="text-xl font-semibold mb-2 flex items-center space-x-2">
+                <Mail className="h-5 w-5" /> <span>Contact by Email</span>
+              </h2>
               <p className="mb-4">
-                Connect with us and other players through our WhatsApp community group:
+                For inquiries, please send us an email:
               </p>
               <a
-                href="https://chat.whatsapp.com/J1B8KkPVLCN2HL7fPK0xf5"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${emailAddress}`}
                 className="text-primary hover:bg-accent hover:text-accent-foreground rounded-md px-4 py-2 transition-colors inline-block"
               >
-                Join WhatsApp Community
+                {emailAddress}
               </a>
             </section>
           </CardContent>
